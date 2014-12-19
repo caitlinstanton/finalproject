@@ -1,5 +1,4 @@
-<h1> finalproject </h1>
-============
+<h1> Final Project </h1>
 
 HI CAITLIN
 omg hai <3
