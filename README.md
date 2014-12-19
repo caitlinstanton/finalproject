@@ -12,6 +12,6 @@ What our product does:
 
 How to run it:
 
-CHANGELOG
+CHANGE LOG
 ============
 12/19- Created repository
