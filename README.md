@@ -12,7 +12,7 @@ What our product does:
 
 How to run it:
 
-CHANGE LOG
+<h2> CHANGE LOG </h2>
 ============
 12/19- Created repository (CS) <br>
 12/19 - said hi (EX)
