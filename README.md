@@ -7,7 +7,8 @@ Period 1 <br>
 Emily Xu <br>
 Caitlin Stanton <br>
 
-What our product does:
+What our product does: <br>
+kick butt
 
 How to run it:
 
