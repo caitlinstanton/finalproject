@@ -1,5 +1,5 @@
-void updateScore() {
-  
+void update() {
+
 };
 
 void setup() {
@@ -10,7 +10,6 @@ void setup() {
   rect(500,0,10,700);
   int x = 0;
   String s = str(x); 
-  //String.valueOf(x);
   x = x + 1;
   s = str(x);
   textSize(32);
