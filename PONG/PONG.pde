@@ -76,3 +76,74 @@ void computermoves (){
   }
 };
 
+//CAITLIN'S CODE FOR NOW
+paddle h1 = new paddle(10,10,true);
+paddle h2 = new paddle(974,10,true);
+  
+void setup() {
+  size(1000, 700);
+  background(0);
+  rect(500,0,10,700);
+  int x = 0;
+  String s = str(x); 
+  x = x + 1;
+  s = str(x);
+  textSize(32);
+  text(s, 450, 50);
+  textSize(32);
+  text(s, 535,50);
+}
+
+void draw() { 
+  h1.update(); 
+  h2.update();  
+} 
+ 
+class paddle { 
+  float ypos, xpos; 
+  boolean Cgoingdown;
+  paddle (float x, float y, boolean down) {  
+    ypos = y; 
+    xpos = x;
+    Cgoingdown = down;
+  } 
+  void update() { 
+    /*
+    if (Cgoingdown == true){
+        if (ypos >= 700){
+          ypos = ypos + 1;;
+        } else {
+          Cgoingdown = false;
+        }
+      } else {
+        if (ypos <= 0){
+          ypos = ypos - 1;
+        } else {
+          Cgoingdown = true;
+        }
+      }
+    */
+    if (0 < ypos && ypos <= 300 && Cgoingdown == true) {
+      ypos = ypos + 1;
+    } else if (ypos <= 299 && ypos > 0 && Cgoingdown == false) {
+      ypos = ypos - 1;
+    } else {
+      Cgoingdown = !Cgoingdown;
+    
+    rect(xpos,ypos,15,100);
+    }
+  }
+}
+
+class ball {
+  float ypos, xpos, diameter;
+  ball(float x, float y, float w, float h) {
+   ypos = y;
+   xpos = x;
+   diameter = w;
+   diameter = h;
+  }
+  void update() {
+    
+  } 
+}
