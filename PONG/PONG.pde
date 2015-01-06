@@ -19,3 +19,25 @@ void setup() {
 };
 
 
+// using Caitlin's class stuff
+
+void computermoves (){
+  boolean Cgoingdown = true;
+  if (Cgoingdown == true){
+    if (h2.ypos >= 700){
+      h2.ypos++;
+    }
+    else {
+      Cgoingdown = false;
+    }
+  }
+  else {
+    if (h2.ypos <= 0){
+      h2.ypos--;
+    }
+    else {
+      Cgoingdown = true;
+    }
+  }
+};
+
