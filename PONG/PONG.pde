@@ -12,9 +12,6 @@ paddle h2 = new paddle(974,10);
 void setup() {
   size(1000, 700);
   background(0);
-  rect(10,10,15,100);
-  rect(974,10,15,100);
-  rect(500,0,10,700);
   
   /* FIGURE OUT HOW TO UPDATE SCORE
   int x = 0;
@@ -33,6 +30,9 @@ void draw() {
   h2.update();  
   
   background(0,0,0);
+  rect(10,10,15,100);
+  rect(974,10,15,100);
+  rect(500,0,10,700);
   fill(255,255,255);
   ellipse(ballX, ballY, 20, 20);
   
@@ -56,11 +56,10 @@ void draw() {
  
 class paddle { 
   float ypos, xpos; 
-  boolean Cgoingdown;
-  paddle (float x, float y, boolean down) {  
+  boolean Cgoingdown = true;
+  paddle (float x, float y) {  
     ypos = y; 
     xpos = x;
-    Cgoingdown = down;
   } 
   void update() { 
     /*
@@ -89,7 +88,6 @@ class paddle {
     }
   }
 }
-
 
 // using Caitlin's class stuff
 
