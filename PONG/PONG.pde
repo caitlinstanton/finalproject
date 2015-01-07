@@ -1,26 +1,22 @@
+//ballX and ballY start the ball in the middle of the screen
+float ballX = 500;
+float ballY = 350;
+
+//MAY NEED TO TOGGLE SPEED
+float dX = random(3, 4);
+float dY = random(3, 4);
+
+paddle h1 = new paddle(10,10);
+paddle h2 = new paddle(974,10);
+  
 void setup() {
   size(1000, 700);
   background(0);
   rect(10,10,15,100);
   rect(974,10,15,100);
   rect(500,0,10,700);
-  int x = 0;
-  String s = str(x); 
-  x = x + 1;
-  s = str(x);
-  textSize(32);
-  text(s, 450, 50);
-  textSize(32);
-  text(s, 535,50);
-};
-
-paddle h1 = new paddle(10,10);
-  paddle h2 = new paddle(974,10);
   
-void setup() {
-  size(1000, 700);
-  background(0);
-  rect(500,0,10,700);
+  /* FIGURE OUT HOW TO UPDATE SCORE
   int x = 0;
   String s = str(x); 
   x = x + 1;
@@ -29,7 +25,8 @@ void setup() {
   text(s, 450, 50);
   textSize(32);
   text(s, 535,50);
-}
+  */
+};
 
 void draw() { 
   h1.update(); 
@@ -97,6 +94,27 @@ void setup() {
 void draw() { 
   h1.update(); 
   h2.update();  
+  
+  background(0,0,0);
+  fill(255,255,255);
+  ellipse(ballX, ballY, 20, 20);
+  
+  //CONTROLS MOVEMENT OF THE BALL
+  //Negating dX/dY makes the ball go in the opposite direction, making it bounce realistically
+  if (ballX > width) {
+    dX = -dX;
+  }
+  if (ballX < 0) {
+    dX = -dX;
+  }
+  if (ballY > height) {
+    dY = -dY;
+  }
+  if (ballY < 0) {
+    dY = -dY;
+  }
+  ballX = ballX + dX;
+  ballY = ballY + dY;
 } 
  
 class paddle { 
@@ -133,17 +151,4 @@ class paddle {
     rect(xpos,ypos,15,100);
     }
   }
-}
-
-class ball {
-  float ypos, xpos, diameter;
-  ball(float x, float y, float w, float h) {
-   ypos = y;
-   xpos = x;
-   diameter = w;
-   diameter = h;
-  }
-  void update() {
-    
-  } 
 }
