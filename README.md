@@ -15,3 +15,5 @@ How to run it:
 1/5 - Started moving player's paddle (EX) <br>
     - Created class for paddles (CS) <br>
     - Started moving computer's paddle (EX)
+    - Created the ball, made it move around the screen, made it bounce at the edges (CS) <br>
+    - Fixed background so it gets updated in draw() (CS) <br>
