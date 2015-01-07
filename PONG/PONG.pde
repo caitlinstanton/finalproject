@@ -8,6 +8,11 @@ float dY = random(3, 4);
 
 paddle h1 = new paddle(10,10);
 paddle h2 = new paddle(974,10);
+float paddle1Y = 350;
+float paddle2Y = 350;
+float Dpaddle1 = 0;
+float Dpaddle2 = 0;
+
   
 void setup() {
   size(1000, 700);
@@ -26,13 +31,16 @@ void setup() {
 };
 
 void draw() { 
-  h1.update(); 
-  h2.update();  
-  
   background(0,0,0);
-  rect(10,10,15,100);
-  rect(974,10,15,100);
+  rect(10,paddle1Y,15,100);
+  rect(974,paddle2Y,15,100);
   rect(500,0,10,700);
+  
+  paddle1Y = paddle1Y + Dpaddle1;
+  paddle2Y = paddle2Y + Dpaddle2;
+  Dpaddle1 = 0;
+  Dpaddle2 = 0;
+  
   fill(255,255,255);
   ellipse(ballX, ballY, 20, 20);
   
@@ -52,7 +60,31 @@ void draw() {
   }
   ballX = ballX + dX;
   ballY = ballY + dY;
+  
+  
 } 
+
+void keyPressed(){
+  if (keyCode == UP){
+    if (paddle1Y >= 0) {
+      Dpaddle1 = -5;
+    }
+  } else if (keyCode == DOWN){
+    if (paddle1Y < 600) {
+      Dpaddle1 = 5;
+    }
+  } else if (keyCode == 'w') {
+    if (paddle2Y > 0) {
+      Dpaddle2 = -5;
+    }
+  } else if (keyCode == 's') {
+    if (paddle2Y < 700) {
+      Dpaddle2 = 5;
+    }
+  } else {
+    Dpaddle1 = 0;
+  }
+}
  
 class paddle { 
   float ypos, xpos; 
