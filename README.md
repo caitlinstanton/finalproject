@@ -21,3 +21,5 @@ How to run it:
     - Fixed the ball movement off the edges and paddles (CS) <br>
     - Finished moving computer's paddle & got the ball to bounce off paddles (EX) <br>
     - Got players' scores to update once ball passes a certain point without touching paddles (CS) <br>
+1/8 - Made end screen to display winner and score (CS) <br>
+    - Started fixing paddle movement to make it more efficient (CS, EX) <br>
