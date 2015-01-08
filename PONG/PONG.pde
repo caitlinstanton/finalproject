@@ -8,26 +8,25 @@ float radius = 20;
 float dX = random(2, 3);
 float dY = random(2, 3);
 
-float paddle1X = 30;
-float paddle2X = 954;
+float paddle1X = 50;
+float paddle2X = 934;
 
 float paddleWidth = 15;
 float paddleHeight = 100;
 
 float paddle1Y = 350;
 float paddle2Y = 350;
-float Dpaddle1 = 0;
-float Dpaddle2 = 0;
 
 boolean paddle1Up;
 boolean paddle1Down;
 boolean paddle2Up;
 boolean paddle2Down;
 
-int paddleSpeed = 10;
+int paddleSpeed = 5;
 
 int p1Score = 0;
 int p2Score = 0;
+String winner = "";
 
 void setup() {
   size(1000, 700);
@@ -35,12 +34,6 @@ void setup() {
 };
 
 void draw() { 
-  background(0,0,0);
-  rect(500,0,5,700);
-  
-  fill(255,255,255);
-  ellipse(ballX, ballY, radius, radius);
-  
   //Defines edges of paddles and ball in order to ensure realistic bouncing
   float ballLeftEdge = ballX - radius + dX;
   float ballRightEdge = ballX + radius + dX;
@@ -54,6 +47,35 @@ void draw() {
   float p2LeftEdge = paddle2X;
   float p2TopEdge = paddle2Y;
   float p2BottomEdge = paddle2Y + paddleHeight;
+  
+  background(0,0,0);
+  rect(500,0,5,height);
+  rect(p1RightEdge,0,2,height);
+  rect(p2LeftEdge,0,2,height);
+  
+  fill(255,255,255);
+  ellipse(ballX, ballY, radius, radius);
+  
+  if (paddle1Up == true) {
+    if (paddle1Y - paddleSpeed > 0) {
+      paddle1Y = paddle1Y - paddleSpeed;
+    }
+  }
+  if (paddle1Down == true) {
+    if (paddle1Y + paddleSpeed + paddleHeight < height) {
+      paddle1Y = paddle1Y + paddleSpeed;
+    }
+  }
+  if (paddle2Up == true) {
+    if (paddle2Y - paddleSpeed > 0) {
+      paddle2Y = paddle2Y - paddleSpeed;
+    }
+  }
+  if (paddle2Down == true) {
+    if (paddle2Y + paddleSpeed + paddleHeight < height) {
+      paddle2Y = paddle2Y + paddleSpeed;
+    }
+  }
   
   //How ball interacts with sides of the screen and paddles
   //bottom and top edge of screen
@@ -83,11 +105,6 @@ void draw() {
   ballX = ballX + dX;
   ballY = ballY + dY;
   
-  paddle1Y = paddle1Y + Dpaddle1;
-  paddle2Y = paddle2Y + Dpaddle2;
-  Dpaddle1 = 0;
-  Dpaddle2 = 0;
-  
   rect(paddle1X, paddle1Y, paddleWidth, paddleHeight);
   rect(paddle2X, paddle2Y, paddleWidth, paddleHeight);
 
@@ -95,7 +112,6 @@ void draw() {
   text(p1Score, 400, 50);
   text(p2Score, 600, 50);
   
-  String winner = "";
   if (p1Score == 5 || p2Score == 5) {
     if (p1Score > p2Score) {
       winner = "Player One WINS!";
@@ -108,6 +124,7 @@ void draw() {
     text(p1Score,500,400);
     text("--", 550, 400);
     text(p2Score, 600, 400);
+    text("Press 'space' to restart or 'enter' to end the game", 250, 500);
     noLoop();
   }
 } 
@@ -115,36 +132,42 @@ void draw() {
 //FIX PADDLE MOVEMENT
 void keyPressed(){
   if (keyCode == UP){
-    if (paddle1Y >= 0) {
-      paddle1Up = true;
-    }
-  } else if (keyCode == DOWN){
-    if (paddle1Y < 600) {
-      paddle1Down = true;
-    }
-  } else if (keyCode == 87){
-    if (paddle2Y > 0) {
+    if (paddle2Y >= 0) {
       paddle2Up = true;
     }
-  } else if (keyCode == 83) {
-    if (paddle2Y < 600) {
+  } else if (keyCode == DOWN){
+    if (paddle2Y < height) {
       paddle2Down = true;
     }
+  } else if (keyCode == 87){
+    if (paddle1Y > 0) {
+      paddle1Up = true;
+    }
+  } else if (keyCode == 83) {
+    if (paddle1Y < height) {
+      paddle1Down = true;
+    }
+  } else if (keyCode == 32) {
+    p1Score = 0;
+    p2Score = 0;
+    loop();
+  } else if (keyCode == ENTER && winner.equals("")){
+    exit();
   }
 }
 
 void keyReleased() {
       if (keyCode == UP) {
-        paddle1Up = false;
-      }
-      else if (keyCode == DOWN) {
-        paddle1Down = false;
-      }
-      else if (keyCode == 87) {
         paddle2Up = false;
       }
-      else if (keyCode == 83) {
+      else if (keyCode == DOWN) {
         paddle2Down = false;
+      }
+      else if (keyCode == 87) {
+        paddle1Up = false;
+      }
+      else if (keyCode == 83) {
+        paddle1Down = false;
       }
 }
  
