@@ -23,3 +23,5 @@ How to run it:
     - Got players' scores to update once ball passes a certain point without touching paddles (CS) <br>
 1/8 - Made end screen to display winner and score (CS) <br>
     - Started fixing paddle movement to make it more efficient (CS, EX) <br>
+    - Used booleans, keyPressed(), and keyReleased() to make paddle movement smoother (CS) <br>
+    - Made it so user can restart game at end (CS) <br>
