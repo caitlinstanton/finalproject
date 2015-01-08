@@ -18,3 +18,4 @@ How to run it:
     - Created the ball, made it move around the screen, made it bounce at the edges (CS) <br>
     - Fixed background so it gets updated in draw() (CS) <br>
 1/7 - Finished moving player's paddle (EX, CS) <br>
+    - Fixed the ball movement off the edges (CS) <br>
