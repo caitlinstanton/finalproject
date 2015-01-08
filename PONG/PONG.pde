@@ -1,3 +1,4 @@
+
 //ballX and ballY start the ball in the middle of the screen
 float ballX = 500;
 float ballY = 350;
@@ -46,6 +47,13 @@ void draw() {
   
   //CONTROLS MOVEMENT OF THE BALL
   //Negating dX/dY makes the ball go in the opposite direction, making it bounce realistically
+  
+  if (ballX < 25 && ballY >= paddle1Y && ballY <= (paddle1Y+100)) {
+    dX = -dX;
+  }
+  if (ballX > 974 && ballY >= paddle2Y && ballY <= (paddle2Y+100)) {
+    dX = -dX;
+  }
   if (ballX > width) {
     dX = -dX;
   }
@@ -67,19 +75,19 @@ void draw() {
 void keyPressed(){
   if (keyCode == UP){
     if (paddle1Y >= 0) {
-      Dpaddle1 = -5;
+      Dpaddle1 = -10;
     }
   } else if (keyCode == DOWN){
     if (paddle1Y < 600) {
-      Dpaddle1 = 5;
+      Dpaddle1 = 10;
     }
-  } else if (keyCode == 'w') {
+  } else if (keyCode == 87){
     if (paddle2Y > 0) {
-      Dpaddle2 = -5;
+      Dpaddle2 = -10;
     }
-  } else if (keyCode == 's') {
-    if (paddle2Y < 700) {
-      Dpaddle2 = 5;
+  } else if (keyCode == 83) {
+    if (paddle2Y < 600) {
+      Dpaddle2 = 10;
     }
   } else {
     Dpaddle1 = 0;
