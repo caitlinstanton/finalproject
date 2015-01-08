@@ -1,75 +1,93 @@
-
 //ballX and ballY start the ball in the middle of the screen
+//FIGURE OUT HOW TO SEND BALL TO SIDE THAT DIDN'T SCORE
 float ballX = 500;
 float ballY = 350;
+float radius = 20;
 
 //MAY NEED TO TOGGLE SPEED
-float dX = random(3, 4);
-float dY = random(3, 4);
+float dX = random(2, 3);
+float dY = random(2, 3);
 
-paddle h1 = new paddle(10,10);
-paddle h2 = new paddle(974,10);
+float paddle1X = 30;
+float paddle2X = 954;
+
+float paddleWidth = 15;
+float paddleHeight = 100;
+
 float paddle1Y = 350;
 float paddle2Y = 350;
 float Dpaddle1 = 0;
 float Dpaddle2 = 0;
 
+int p1Score = 0;
+int p2Score = 0;
+
   
 void setup() {
   size(1000, 700);
   background(0);
-  
-  /* FIGURE OUT HOW TO UPDATE SCORE
-  int x = 0;
-  String s = str(x); 
-  x = x + 1;
-  s = str(x);
-  textSize(32);
-  text(s, 450, 50);
-  textSize(32);
-  text(s, 535,50);
-  */
 };
 
 void draw() { 
   background(0,0,0);
-  rect(10,paddle1Y,15,100);
-  rect(974,paddle2Y,15,100);
-  rect(500,0,10,700);
+  rect(500,0,5,700);
+  
+  fill(255,255,255);
+  ellipse(ballX, ballY, radius, radius);
+  
+  //Defines edges of paddles and ball in order to ensure realistic bouncing
+  float ballLeftEdge = ballX - radius + dX;
+  float ballRightEdge = ballX + radius + dX;
+  float ballTopEdge = ballY - radius + dY;
+  float ballBottomEdge = ballY + radius + dY;
+  
+  float p1RightEdge = paddle1X + paddleWidth;
+  float p1TopEdge = paddle1Y;
+  float p1BottomEdge = paddle1Y + paddleHeight;
+
+  float p2LeftEdge = paddle2X;
+  float p2TopEdge = paddle2Y;
+  float p2BottomEdge = paddle2Y + paddleHeight;
+  
+  //How ball interacts with sides of the screen and paddles
+  //bottom and top edge of screen
+  if (ballTopEdge < 0 || ballBottomEdge > height) {
+    dY = -dY;
+  }
+  //interacting with paddle edges
+  if (ballLeftEdge < p1RightEdge) {
+    if (ballTopEdge > p1BottomEdge || ballBottomEdge < p1TopEdge) {
+      p2Score = p2Score + 1;
+      ballX = 500;
+      ballY = 350;
+    } else {
+      dX = -dX;
+    }
+  }
+  if (ballRightEdge > p2LeftEdge) {
+    if (ballTopEdge > p2BottomEdge || ballBottomEdge < p2TopEdge) {
+      p1Score = p1Score + 1;
+      ballX = 500;
+      ballY = 350;
+    } else {
+      dX = -dX;
+    }
+  }
+  
+  ballX = ballX + dX;
+  ballY = ballY + dY;
   
   paddle1Y = paddle1Y + Dpaddle1;
   paddle2Y = paddle2Y + Dpaddle2;
   Dpaddle1 = 0;
   Dpaddle2 = 0;
   
-  fill(255,255,255);
-  ellipse(ballX, ballY, 20, 20);
-  
-  //CONTROLS MOVEMENT OF THE BALL
-  //Negating dX/dY makes the ball go in the opposite direction, making it bounce realistically
-  
-  if (ballX < 25 && ballY >= paddle1Y && ballY <= (paddle1Y+100)) {
-    dX = -dX;
-  }
-  if (ballX > 974 && ballY >= paddle2Y && ballY <= (paddle2Y+100)) {
-    dX = -dX;
-  }
-  if (ballX > width) {
-    dX = -dX;
-  }
-  if (ballX < 0) {
-    dX = -dX;
-  }
-  if (ballY > height) {
-    dY = -dY;
-  }
-  if (ballY < 0) {
-    dY = -dY;
-  }
-  ballX = ballX + dX;
-  ballY = ballY + dY;
-  
-  
+  rect(paddle1X, paddle1Y, paddleWidth, paddleHeight);
+  rect(paddle2X, paddle2Y, paddleWidth, paddleHeight);
+
+  textSize(30);
+  text(p1Score, 400, 50);
+  text(p2Score, 600, 50);
 } 
 
 void keyPressed(){
@@ -129,7 +147,7 @@ class paddle {
   }
 }
 
-// using Caitlin's class stuff
+/* using Caitlin's class stuff
 
 void computermoves (){
   boolean Cgoingdown = true;
@@ -150,3 +168,4 @@ void computermoves (){
     }
   }
 };
+*/
