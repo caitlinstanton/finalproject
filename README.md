@@ -19,3 +19,4 @@ How to run it:
     - Fixed background so it gets updated in draw() (CS) <br>
 1/7 - Finished moving player's paddle (EX, CS) <br>
     - Fixed the ball movement off the edges (CS) <br>
+    - Finished moving computer's paddle & got the ball to bounce off paddles (EX) <br>
