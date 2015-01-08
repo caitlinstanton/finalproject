@@ -18,5 +18,6 @@ How to run it:
     - Created the ball, made it move around the screen, made it bounce at the edges (CS) <br>
     - Fixed background so it gets updated in draw() (CS) <br>
 1/7 - Finished moving player's paddle (EX, CS) <br>
-    - Fixed the ball movement off the edges (CS) <br>
+    - Fixed the ball movement off the edges and paddles (CS) <br>
     - Finished moving computer's paddle & got the ball to bounce off paddles (EX) <br>
+    - Got players' scores to update once ball passes a certain point without touching paddles (CS) <br>
