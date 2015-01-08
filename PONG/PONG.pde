@@ -19,10 +19,16 @@ float paddle2Y = 350;
 float Dpaddle1 = 0;
 float Dpaddle2 = 0;
 
+boolean paddle1Up;
+boolean paddle1Down;
+boolean paddle2Up;
+boolean paddle2Down;
+
+int paddleSpeed = 10;
+
 int p1Score = 0;
 int p2Score = 0;
 
-  
 void setup() {
   size(1000, 700);
   background(0);
@@ -88,28 +94,58 @@ void draw() {
   textSize(30);
   text(p1Score, 400, 50);
   text(p2Score, 600, 50);
+  
+  String winner = "";
+  if (p1Score == 5 || p2Score == 5) {
+    if (p1Score > p2Score) {
+      winner = "Player One WINS!";
+    }
+    if (p2Score > p1Score) {
+      winner = "Player Two WINS!";
+    }
+    background(0,0,0);
+    text(winner, 500, 350);
+    text(p1Score,500,400);
+    text("--", 550, 400);
+    text(p2Score, 600, 400);
+    noLoop();
+  }
 } 
 
+//FIX PADDLE MOVEMENT
 void keyPressed(){
   if (keyCode == UP){
     if (paddle1Y >= 0) {
-      Dpaddle1 = -10;
+      paddle1Up = true;
     }
   } else if (keyCode == DOWN){
     if (paddle1Y < 600) {
-      Dpaddle1 = 10;
+      paddle1Down = true;
     }
   } else if (keyCode == 87){
     if (paddle2Y > 0) {
-      Dpaddle2 = -10;
+      paddle2Up = true;
     }
   } else if (keyCode == 83) {
     if (paddle2Y < 600) {
-      Dpaddle2 = 10;
+      paddle2Down = true;
     }
-  } else {
-    Dpaddle1 = 0;
   }
+}
+
+void keyReleased() {
+      if (keyCode == UP) {
+        paddle1Up = false;
+      }
+      else if (keyCode == DOWN) {
+        paddle1Down = false;
+      }
+      else if (keyCode == 87) {
+        paddle2Up = false;
+      }
+      else if (keyCode == 83) {
+        paddle2Down = false;
+      }
 }
  
 class paddle { 
@@ -148,7 +184,6 @@ class paddle {
 }
 
 /* using Caitlin's class stuff
-
 void computermoves (){
   boolean Cgoingdown = true;
   if (Cgoingdown == true){
