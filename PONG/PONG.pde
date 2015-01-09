@@ -1,12 +1,11 @@
 //ballX and ballY start the ball in the middle of the screen
-//FIGURE OUT HOW TO SEND BALL TO SIDE THAT DIDN'T SCORE
 float ballX = 500;
 float ballY = 350;
 float radius = 20;
 
 //MAY NEED TO TOGGLE SPEED
-float dX = random(2, 3);
-float dY = random(2, 3);
+float dX = random(4, 5);
+float dY = random(4, 5);
 
 float paddle1X = 50;
 float paddle2X = 934;
@@ -37,6 +36,8 @@ boolean circle1Over = false;
 boolean circle2Over = false;
 
 boolean startgame = false;
+boolean vsPlayer = false;
+boolean vsComputer = false;
 // need to differentiate btw player vs. computer && player vs. player
 
 void setup() {
@@ -84,51 +85,29 @@ void draw() {
   text("-", circle2X-1, 530);
   text("you play against a computer", 540, 560);
   
-  
   if (startgame == true){
     //Defines edges of paddles and ball in order to ensure realistic bouncing
-    float ballLeftEdge = ballX - radius + dX;
-    float ballRightEdge = ballX + radius + dX;
-    float ballTopEdge = ballY - radius + dY;
-    float ballBottomEdge = ballY + radius + dY;
+      float ballLeftEdge = ballX - radius + dX;
+      float ballRightEdge = ballX + radius + dX;
+      float ballTopEdge = ballY - radius + dY;
+      float ballBottomEdge = ballY + radius + dY;
   
-    float p1RightEdge = paddle1X + paddleWidth;
-    float p1TopEdge = paddle1Y;
-    float p1BottomEdge = paddle1Y + paddleHeight;
+      float p1RightEdge = paddle1X + paddleWidth;
+      float p1TopEdge = paddle1Y;
+      float p1BottomEdge = paddle1Y + paddleHeight;
 
-    float p2LeftEdge = paddle2X;
-    float p2TopEdge = paddle2Y;
-    float p2BottomEdge = paddle2Y + paddleHeight;
-  
-    background(0,0,0);
-    rect(500,0,5,height);
-    rect(p1RightEdge,0,2,height);
-    rect(p2LeftEdge,0,2,height);
-  
-    fill(255,255,255);
-    ellipse(ballX, ballY, radius, radius);
-  
-    if (paddle1Up == true) {
-      if (paddle1Y - paddleSpeed > 0) {
-        paddle1Y = paddle1Y - paddleSpeed;
-      }
-    }
-    if (paddle1Down == true) {
-      if (paddle1Y + paddleSpeed + paddleHeight < height) {
-        paddle1Y = paddle1Y + paddleSpeed;
-      }
-    }
-    if (paddle2Up == true) {
-      if (paddle2Y - paddleSpeed > 0) {
-        paddle2Y = paddle2Y - paddleSpeed;
-      }
-    }
-    if (paddle2Down == true) {
-      if (paddle2Y + paddleSpeed + paddleHeight < height) {
-        paddle2Y = paddle2Y + paddleSpeed;
-      }
-    }
-  
+      float p2LeftEdge = paddle2X;
+      float p2TopEdge = paddle2Y;
+      float p2BottomEdge = paddle2Y + paddleHeight;
+      
+      background(0,0,0);
+      rect(500,0,5,height);
+      rect(p1RightEdge,0,2,height);
+      rect(p2LeftEdge,0,2,height);
+      
+      fill(255,255,255);
+      ellipse(ballX, ballY, radius, radius);
+      
     //How ball interacts with sides of the screen and paddles
     //bottom and top edge of screen
     if (ballTopEdge < 0 || ballBottomEdge > height) {
@@ -156,15 +135,70 @@ void draw() {
   
     ballX = ballX + dX;
     ballY = ballY + dY;
-  
-    rect(paddle1X, paddle1Y, paddleWidth, paddleHeight);
-    rect(paddle2X, paddle2Y, paddleWidth, paddleHeight);
+    
+    if (vsPlayer == true) {
+      if (paddle1Up == true) {
+        if (paddle1Y - paddleSpeed > 0) {
+          paddle1Y = paddle1Y - paddleSpeed;
+        }
+      }
+      if (paddle1Down == true) {
+        if (paddle1Y + paddleSpeed + paddleHeight < height) {
+          paddle1Y = paddle1Y + paddleSpeed;
+        }
+      }
+      if (paddle2Up == true) {
+        if (paddle2Y - paddleSpeed > 0) {
+          paddle2Y = paddle2Y - paddleSpeed;
+        }
+      }
+      if (paddle2Down == true) {
+        if (paddle2Y + paddleSpeed + paddleHeight < height) {
+          paddle2Y = paddle2Y + paddleSpeed;
+        }
+      }
+      rect(paddle1X, paddle1Y, paddleWidth, paddleHeight);
+      rect(paddle2X, paddle2Y, paddleWidth, paddleHeight);
 
-    textSize(30);
-    text(p1Score, 400, 50);
-    text(p2Score, 600, 50);
+      textSize(30);
+      text(p1Score, 400, 50);
+      text(p2Score, 600, 50);
+    }
+    
+    //FIX COMPUTER PLAYER THING UGH
+    /*
+    if (vsComputer = true) {
+      if (paddle1Up == true) {
+        if (paddle1Y - paddleSpeed > 0) {
+          paddle1Y = paddle1Y - paddleSpeed;
+        }
+      }
+      if (paddle1Down == true) {
+        if (paddle1Y + paddleSpeed + paddleHeight < height) {
+          paddle1Y = paddle1Y + paddleSpeed;
+        }
+      }
+      
+      while (startgame == true) {
+        float upVal = random(1,10);
+        float downVal = 20 - upVal;
+        float val;
+        for (val = 0; val < 20; val++) {
+         if (val < downVal) {
+           if (val < upVal) {
+             paddle2Up = true;
+           } else {
+             paddle2Down = true;
+           }
+         }
+        }
+        val = 0;
+       }
+  }
+  */
   
     if (p1Score == 5 || p2Score == 5) {
+      startgame = false;
       if (p1Score > p2Score) {
         winner = "Player One WINS!";
       }
@@ -180,7 +214,7 @@ void draw() {
       noLoop();
     }
    }
-} 
+}
 
 void update(int x, int y) {
   if (overCircle(circle1X, circle1Y, circleSize)){
@@ -199,10 +233,12 @@ void mousePressed(){
   if (circle1Over == true){
      //circle1Color = circle1Color+10;
      startgame = true;
+     vsPlayer = true;
   }
   if (circle2Over == true){
     //circle2Color = circle2Color+10;
     startgame = true;
+    vsComputer = true;
   }
 }
 
