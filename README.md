@@ -30,3 +30,4 @@ How to run it:
     - Started fixing paddle movement to make it more efficient (CS, EX) <br>
     - Used booleans, keyPressed(), and keyReleased() to make paddle movement smoother (CS) <br>
     - Made it so user can restart game at end (CS) <br>
+    - Created starting page & linked it to the start of the game (EX) <br>
