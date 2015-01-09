@@ -28,12 +28,38 @@ int p1Score = 0;
 int p2Score = 0;
 String winner = "";
 
+int circle1X, circle1Y;
+int circle2X, circle2Y;
+int circleSize = 100;
+color circle1Color, circle2Color;
+boolean circle1Over = false;
+boolean circle2Over = false;
+
 void setup() {
   size(1000, 700);
   background(0);
+  circle1Color = color(42);
+  circle2Color = color (98);
+  circle1X = width/2 - circleSize;
+  circle1Y = height/2;
+  circle2X = width/2 + circleSize;
+  circle2Y = height/2;
+  
 };
 
+
 void draw() { 
+//  background(34);
+  size(1000, 700);
+  background(0);
+  circle1Color = color(42);
+  circle2Color = color (98);
+  circle1X = width/2 - circleSize;
+  circle1Y = height/2;
+  circle2X = width/2 + circleSize;
+  circle2Y = height/2;
+  
+/*  
   //Defines edges of paddles and ball in order to ensure realistic bouncing
   float ballLeftEdge = ballX - radius + dX;
   float ballRightEdge = ballX + radius + dX;
@@ -126,7 +152,7 @@ void draw() {
     text(p2Score, 600, 400);
     text("Press 'space' to restart or 'enter' to end the game", 250, 500);
     noLoop();
-  }
+  } */
 } 
 
 //FIX PADDLE MOVEMENT
