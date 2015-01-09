@@ -31,3 +31,5 @@ How to run it:
     - Used booleans, keyPressed(), and keyReleased() to make paddle movement smoother (CS) <br>
     - Made it so user can restart game at end (CS) <br>
     - Created starting page & linked it to the start of the game (EX) <br>
+
+1/9 - Tried splitting up versus a player and a computer by connecting it to the buttons on the homepage (CS, EX) <br>
