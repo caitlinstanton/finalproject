@@ -41,5 +41,11 @@ void playermoves(){
 }
 
 
-https://processing.org/examples/button.html
-http://www.rgbhex.com/
+https://processing.org/examples/button.html <---button info
+http://www.rgbhex.com/ <---color info
+
+sound info:
+https://www.processing.org/reference/libraries/sound/index.html <---general
+https://www.processing.org/reference/libraries/sound/SoundFile.html <---using mp3 file
+http://onlinetonegenerator.com/noise.html <---online tone generator
+http://onlinetonegenerator.com/432Hz.html <---frequencies
