@@ -136,6 +136,7 @@ void draw() {
     ballX = ballX + dX;
     ballY = ballY + dY;
     
+    /*************************** vs Player *****************************/
     if (vsPlayer == true) {
       if (paddle1Up == true) {
         if (paddle1Y - paddleSpeed > 0) {
@@ -165,9 +166,10 @@ void draw() {
       text(p2Score, 600, 50);
     }
     
+    /****************************** vs Computer ****************************/
     //FIX COMPUTER PLAYER THING UGH
-    /*
-    if (vsComputer = true) {
+ 
+    if (vsComputer == true) {
       if (paddle1Up == true) {
         if (paddle1Y - paddleSpeed > 0) {
           paddle1Y = paddle1Y - paddleSpeed;
@@ -179,7 +181,7 @@ void draw() {
         }
       }
       
-      while (startgame == true) {
+/*      while (startgame == true) {
         float upVal = random(1,10);
         float downVal = 20 - upVal;
         float val;
@@ -194,8 +196,33 @@ void draw() {
         }
         val = 0;
        }
+       */
+       
+/*      if (startgame == true) {
+       float upVal = random(1,10);
+       float downVal = 20 - upVal;
+       float val;
+       for (val = 0; val < 20; val++) {
+        if (val < downVal) {
+          if (val < upVal) {
+            paddle2Up = true;
+          } else {
+            paddle2Down = true;
+          }
+        }
+       }
+       val = 0;
+      }
+
+*/
+      rect(paddle1X, paddle1Y, paddleWidth, paddleHeight);
+      rect(paddle2X, paddle2Y, paddleWidth, paddleHeight);
+
+      textSize(30);
+      text(p1Score, 400, 50);
+      text(p2Score, 600, 50);
   }
-  */
+  
   
     if (p1Score == 5 || p2Score == 5) {
       startgame = false;
@@ -206,11 +233,11 @@ void draw() {
         winner = "Player Two WINS!";
       }
       background(0,0,0);
-      text(winner, 500, 350);
-      text(p1Score,500,400);
-      text("--", 550, 400);
-      text(p2Score, 600, 400);
-      text("Press 'space' to restart or 'enter' to end the game", 250, 500);
+      text(winner, 370, 250);
+      text(p1Score,445,300);
+      text("--", 475, 300);
+      text(p2Score, 525, 300);
+      text("Press 'space' to restart or 'enter' to end the game", 146, 500);
       noLoop();
     }
    }
