@@ -49,3 +49,40 @@ https://www.processing.org/reference/libraries/sound/index.html <---general
 https://www.processing.org/reference/libraries/sound/SoundFile.html <---using mp3 file
 http://onlinetonegenerator.com/noise.html <---online tone generator
 http://onlinetonegenerator.com/432Hz.html <---frequencies
+
+
+
+
+images at the end:
+
+PImage imgw1, imgw2, imgw3, imgw4, imgw5;
+PImage imgl1, imgl2, imgl3, imgl4, imgl5;
+
+void setup() {
+  //images must be in the "data" directory to load correctly
+  imgw1 = loadImage("winner1.jpg");
+  imgw2 = loadImage("winner2.jpg");
+  imgw3 = loadImage("winner3.jpg");
+  imgw4 = loadImage("winner4.jpg");
+  imgw5 = loadImage("winner5.jpg");
+
+  imgl1 = loadImage("loser1.png");
+  imgl2 = loadImage("loser2.jpg");
+  imgl3 = loadImage("loser3.jpg");
+  imgl4 = loadImage("loser4.png");
+  imgl5 = loadImage("loser5.jpg");
+}
+
+void draw() {
+  image(imgw1, 0, 0);
+  image(imgw2, 0, 0);
+  image(imgw3, 0, 0);
+  image(imgw4, 0, 0);
+  image(imgw5, 0, 0);
+
+  image(imgl1, 0, 0);
+  image(imgl2, 0, 0);
+  image(imgl3, 0, 0);
+  image(imgl4, 0, 0);
+  image(imgl5, 0, 0);
+}
