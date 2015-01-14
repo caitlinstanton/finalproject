@@ -33,3 +33,7 @@ How to run it:
     - Created starting page & linked it to the start of the game (EX) <br>
 
 1/9 - Tried splitting up versus a player and a computer by connecting it to the buttons on the homepage (CS, EX) <br>
+
+1/14 - Fixed game so that you can exit the game when you press ENTER (cs) <br>
+     - Started working on the computer AI (CS) <br>
+     - Added images for the endscreen (EX) <br>
