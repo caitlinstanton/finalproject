@@ -301,7 +301,7 @@ void keyPressed(){
     p1Score = 0;
     p2Score = 0;
     loop();
-  } else if (keyCode == ENTER && winner.equals("")){
+  } else if (keyCode == ENTER && winner.equals("") == false){
     exit();
   }
 }
