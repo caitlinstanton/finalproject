@@ -37,3 +37,4 @@ How to run it:
 1/14 - Fixed game so that you can exit the game when you press ENTER (cs) <br>
      - Started working on the computer AI (CS) <br>
      - Added images for the endscreen (EX) <br>
+     - Worked on sounds for ball bounces & images for winner/loser screen (EX) <br>
