@@ -251,7 +251,7 @@ void draw() {
   }
   
   
-    if (p1Score == 5 || p2Score == 5) {
+    if (p1Score == 1 || p2Score == 1) {
       startgame = false;
       if (p1Score > p2Score) {
         winner = "Player One WINS!";
@@ -266,18 +266,32 @@ void draw() {
       text(p2Score, 525, 300);
       text("Press 'space' to restart or 'enter' to end the game", 146, 500);
       
-      image(imgw1, 0, 0);
-      //image(imgw2, 0, 0);
-      //image(imgw3, 0, 0);
-      //image(imgw4, 0, 0);
-      //image(imgw5, 0, 0);
+      if (winner == "Player One WINS!"){
+        image(imgw1, 0, 0);
+        image(imgw2, 0, 100);
+        image(imgw3, 0, 200);
+        image(imgw4, 0, 300);
+        image(imgw5, 0, 400);
 
-      //image(imgl1, 0, 0); 
-      //image(imgl2, 0, 0);
-      //image(imgl3, 0, 0);
-      //image(imgl4, 0, 0);
-      //image(imgl5, 0, 0);
-      
+        image(imgl1, 350, 0); 
+        image(imgl2, 350, 100);
+        image(imgl3, 350, 200);
+        image(imgl4, 350, 300);
+        image(imgl5, 350, 400);
+      } 
+      if (winner == "Player Two WINS!") {
+        image(imgw1, 350, 0);
+        image(imgw2, 350, 100);
+        image(imgw3, 350, 200);
+        image(imgw4, 350, 300);
+        image(imgw5, 350, 400);
+
+        image(imgl1, 0, 0); 
+        image(imgl2, 0, 100);
+        image(imgl3, 0, 200);
+        image(imgl4, 0, 300);
+        image(imgl5, 0, 400);
+      }
       noLoop();
     }
    }
