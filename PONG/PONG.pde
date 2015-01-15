@@ -197,6 +197,7 @@ void draw() {
     //FIX COMPUTER PLAYER THING UGH
  
     if (vsComputer == true) {
+    move();
       if (paddle1Up == true) {
         if (paddle1Y - paddleSpeed > 0) {
           paddle1Y = paddle1Y - paddleSpeed;
@@ -208,40 +209,6 @@ void draw() {
         }
       }
       
-/*      while (startgame == true) {
-        float upVal = random(1,10);
-        float downVal = 20 - upVal;
-        float val;
-        for (val = 0; val < 20; val++) {
-         if (val < downVal) {
-           if (val < upVal) {
-             paddle2Up = true;
-           } else {
-             paddle2Down = true;
-           }
-         }
-        }
-        val = 0;
-       }
-       */
-       
-/*      if (startgame == true) {
-       float upVal = random(1,10);
-       float downVal = 20 - upVal;
-       float val;
-       for (val = 0; val < 20; val++) {
-        if (val < downVal) {
-          if (val < upVal) {
-            paddle2Up = true;
-          } else {
-            paddle2Down = true;
-          }
-        }
-       }
-       val = 0;
-      }
-
-*/
       rect(paddle1X, paddle1Y, paddleWidth, paddleHeight);
       rect(paddle2X, paddle2Y, paddleWidth, paddleHeight);
 
@@ -373,6 +340,39 @@ void keyReleased() {
       else if (keyCode == 83) {
         paddle1Down = false;
       }
+}
+
+/** this method moves the computer */ 
+public void move () {
+// calculate the middle of the paddle 
+  float middleY = paddle2Y + (paddleHeight / 2); 
+
+  //Ball is moving away from the paddle
+  //Poses no danger to the computer
+  if (ballX < 500) {
+    // if the paddle's position is over the middle y - position 
+    if (paddle2Y < 148) {
+      paddle2Y = paddle2Y + paddleSpeed; 
+    } 
+// Paddle is under the middle y - position 
+    else if (paddle2Y > 152) {
+      paddle2Y = paddle2Y - paddleSpeed; 
+    }
+  } 
+// ball is moving towards paddle 
+  else if (ballX > 500) {
+// As long as ball's y - position and paddle's y - position are different 
+    if (paddle2Y != ballY) {
+// If ball's position smaller than paddle's, move up 
+      if (ballY < paddle2Y) {
+        paddle2Y = paddle2Y - paddleSpeed; 
+      } 
+// If ball's position greater than paddle's, move down 
+      else if (ballY > paddle2Y) {
+        paddle2Y = paddle2Y + paddleSpeed; 
+      } 
+    }
+  }
 }
  
 class paddle { 
