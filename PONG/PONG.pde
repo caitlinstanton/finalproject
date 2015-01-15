@@ -1,3 +1,12 @@
+//NEED TO DOWNLOAD SOUND LIBRARYYYYYYYYY
+//image stuff works, just need to set layout
+
+//import processing.sound.*;
+//SoundFile paddlesound, wallsound;
+PImage imgw1, imgw2, imgw3, imgw4, imgw5;
+PImage imgl1, imgl2, imgl3, imgl4, imgl5;
+
+
 //ballX and ballY start the ball in the middle of the screen
 float ballX = 500;
 float ballY = 350;
@@ -51,6 +60,21 @@ void setup() {
   circle1Y = height/2;
   circle2X = width/2 + circleSize*2;
   circle2Y = height/2;
+  
+//  paddlesound = new SoundFile(this, "mushroom.wav");
+//  wallsound = new SoundFile(this,"beeping.flac");
+  
+  imgw1 = loadImage("winner1.jpg");
+  imgw2 = loadImage("winner2.jpg");
+  imgw3 = loadImage("winner3.jpg");
+  imgw4 = loadImage("winner4.jpg");
+  imgw5 = loadImage("winner5.jpg");
+
+  imgl1 = loadImage("loser1.png");
+  imgl2 = loadImage("loser2.jpg");
+  imgl3 = loadImage("loser3.jpg");
+  imgl4 = loadImage("loser4.png");
+  imgl5 = loadImage("loser5.jpg");
 }
 
 
@@ -112,6 +136,7 @@ void draw() {
     //bottom and top edge of screen
     if (ballTopEdge < 0 || ballBottomEdge > height) {
       dY = -dY;
+//      wallsound.play();
     }
     //interacting with paddle edges
     if (ballLeftEdge < p1RightEdge) {
@@ -121,6 +146,7 @@ void draw() {
         ballY = 350;
       } else {
         dX = -dX;
+//        paddlesound.play();
       }
     }
     if (ballRightEdge > p2LeftEdge) {
@@ -130,6 +156,7 @@ void draw() {
         ballY = 350;
       } else {
         dX = -dX;
+//        paddlesound.play();
       }
     }
   
@@ -238,6 +265,19 @@ void draw() {
       text("--", 475, 300);
       text(p2Score, 525, 300);
       text("Press 'space' to restart or 'enter' to end the game", 146, 500);
+      
+      image(imgw1, 0, 0);
+      //image(imgw2, 0, 0);
+      //image(imgw3, 0, 0);
+      //image(imgw4, 0, 0);
+      //image(imgw5, 0, 0);
+
+      //image(imgl1, 0, 0); 
+      //image(imgl2, 0, 0);
+      //image(imgl3, 0, 0);
+      //image(imgl4, 0, 0);
+      //image(imgl5, 0, 0);
+      
       noLoop();
     }
    }
