@@ -4,10 +4,20 @@ Period 1 <br>
 Emily Xu and Caitlin Stanton <br>
 
 What our product does: <br>
-It is a version of the popular game, Pong. <br>
+It is a version of the popular game, Pong. There is a two-player version and a one-player version, one of which
+can be selected at the start of the game.
 
-How to run it:
-
+How to run it: <br>
+At the start of the game, a screen will pop up, asking you to choose between a red pill and a blue pill.
+Click on the red pill if you wish to play against another person. Click the blue pill if you wish to play
+against a computer.
+For the two-player version, player 1 will navigate their paddle with the W and S keys, while player 2 will
+use the UP and DOWN keys.
+For the one-player version, player 1 (which is the player) will navigate their paddle with the W and S keys.
+Nobody will use the UP and DOWN keys, as the computer player is self-controlled.
+The object of the game is to get the ball into the opposing player's goal. The first player to reach 5 points wins.
+Once a winner has emerged, the end screen will display, showing the score and who won. There you have a choice: press SPACE and go back to the start screen to play another game, or press ENTER to exit the game.
+Enjoy!
 
 <h2> CHANGE LOG </h2>
 12/19 - Created repository (CS) <br>
@@ -38,3 +48,6 @@ How to run it:
      - Started working on the computer AI (CS) <br>
      - Added images for the endscreen (EX) <br>
      - Worked on sounds for ball bounces & images for winner/loser screen (EX) <br>
+
+1/15 - Worked on sounds for ball bounces & images for winner/loser screen (EX) <br>
+     - Got computer AI to work; just need to adjust where ball bounces on paddle and add flaws (CS) <br>
