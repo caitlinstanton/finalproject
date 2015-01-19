@@ -49,6 +49,29 @@ boolean vsPlayer = false;
 boolean vsComputer = false;
 // need to differentiate btw player vs. computer && player vs. player
 
+int rect1X;
+int rect2X;
+int rect3X;
+int rectY;
+int rectHeight = 30;
+int rectLength = 100;
+color currentColor1, currentColor2, currentColor3;
+color rectColor;
+color rectHighlight;
+boolean rect1Over = false;
+boolean rect2Over = false;
+boolean rect3Over = false;
+
+boolean levelEasy = false;
+boolean levelMedium = false;
+boolean levelHard = false;
+
+float ballSpeed;
+float ballSpeedEasy = random(1,2);
+float ballSpeedMedium = random(4,5);
+float ballSpeedHard = random(9,10);
+
+
 void setup() {
   size(1000, 700);
   background(0);
@@ -57,9 +80,17 @@ void setup() {
   circle1Highlight = color (255,100,100);
   circle2Highlight = color(0, 100, 255);
   circle1X = width/2 - circleSize*2;
-  circle1Y = height/2;
+  circle1Y = height/2 + 80;
   circle2X = width/2 + circleSize*2;
-  circle2Y = height/2;
+  circle2Y = height/2 + 80;
+  
+  rectColor = color(0,153,0);
+  currentColor1 = currentColor2 = currentColor3 = rectColor;
+  rectHighlight = color(0,255,0);
+  rect1X = 400;
+  rect2X = 550;
+  rect3X = 700;
+  rectY = 255;
   
 //  paddlesound = new SoundFile(this, "mushroom.wav");
 //  wallsound = new SoundFile(this,"beeping.flac");
@@ -101,15 +132,96 @@ void draw() {
   textSize(100);
   text("PONG", 356, 175);
   textSize(25);
-  text("You take the red pill", 180, 500); 
+  text("You take the red pill", 180, 500+50); 
   //146 if size 32
-  text("-", circle1X-1, 530);
-  text("you play against a player", 156, 560);
-  text("You take the blue pill", 575, 500);
-  text("-", circle2X-1, 530);
-  text("you play against a computer", 540, 560);
+  text("-", circle1X-1, 530+50);
+  text("you play against a player", 156, 560+50);
+  text("You take the blue pill", 575, 500+50);
+  text("-", circle2X-1, 530+50);
+  text("you play against a computer", 540, 560+50);
   
+  if (rect1Over == true){
+    fill(rectHighlight);
+    dX = ballSpeedEasy;
+    dY = ballSpeedEasy;
+  } else {
+    fill(currentColor1);
+  }
+  rect(rect1X, rectY, rectLength, rectHeight);
+  
+  if (rect2Over == true){
+    fill(rectHighlight);
+    dX = ballSpeedMedium;
+    dY = ballSpeedMedium;
+  } else {
+    fill(currentColor2);
+  }
+  rect(rect2X, rectY, rectLength, rectHeight);
+ 
+  if (rect3Over == true){
+    fill(rectHighlight);
+    dX = ballSpeedHard;
+    dY = ballSpeedHard;
+  } else {
+    fill(currentColor3);
+  }
+  rect(rect3X, rectY, rectLength, rectHeight); 
+  
+  fill(255,255,255);
+  textSize(20);
+  text("Select difficulty:", 200, 275);
+  textSize(15);
+  text("easy", 435, 275);
+  text("medium", 573, 275);
+  text("hard", 732, 275);
+  
+/*  if (levelEasy == true){
+    dX = ballSpeedEasy;
+    dY = ballSpeedEasy;
+}
+*/
+ /* if (levelMedium == true){
+    dX = ballSpeedMedium;
+    dY = ballSpeedMedium;
+  }
+  if (levelHard == true){
+    dX = ballSpeedHard;
+    dY = ballSpeedHard;
+  }
+  if (levelEasy == true){
+    dX = ballSpeedEasy;
+    dY = ballSpeedEasy;
+  }*/
+  
+  
+ /* if (currentColor1 == rectHighlight){
+    dX = ballSpeedEasy;
+    dY = ballSpeedEasy;
+  }
+  if (currentColor2 == rectHighlight){
+    dX = ballSpeedMedium;
+    dY = ballSpeedMedium;
+  } 
+  if (currentColor3 == rectHighlight) {
+    dX = ballSpeedHard;
+    dY = ballSpeedHard;
+  }
+  */
   if (startgame == true){
+  /*  if (levelMedium == true){
+      dX = ballSpeedMedium;
+      dY = ballSpeedMedium;
+    }
+    if (levelHard == true){
+      dX = ballSpeedHard;
+      dX = ballSpeedHard;
+    }
+    if (levelEasy == true){
+      dX = ballSpeedEasy;
+      dY = ballSpeedEasy;
+    }
+    */
+    
     //Defines edges of paddles and ball in order to ensure realistic bouncing
       float ballLeftEdge = ballX - radius + dX;
       float ballRightEdge = ballX + radius + dX;
@@ -275,6 +387,23 @@ void update(int x, int y) {
     circle1Over = false;
     circle2Over = false;
   }
+  if (overRect(rect1X, rectY, rectLength, rectHeight)){
+    rect1Over = true;
+    rect2Over = false;
+    rect3Over = false;
+  } else if (overRect(rect2X, rectY, rectLength, rectHeight)){
+    rect1Over = false;
+    rect2Over = true;
+    rect3Over = false;
+  } else if (overRect(rect3X, rectY, rectLength, rectHeight)){
+    rect1Over = false;
+    rect2Over = false;
+    rect3Over = true;
+  } else {
+    rect1Over = false;
+    rect2Over = false;
+    rect3Over = false;
+  }
 }
 
 void mousePressed(){
@@ -288,12 +417,81 @@ void mousePressed(){
     startgame = true;
     vsComputer = true;
   }
+  if (rect1Over == true){
+    currentColor1 = rectHighlight;
+    currentColor2 = rectColor;
+    currentColor3 = rectColor;
+    levelEasy = true;
+    levelMedium = false;
+    levelHard = false;
+    dX = ballSpeedEasy;
+    dY = ballSpeedEasy;
+  } else if (rect2Over == true){
+    currentColor1 = rectColor;
+    currentColor2 = rectHighlight;
+    currentColor3 = rectColor;
+    levelEasy = false;
+    levelMedium = true;
+    levelHard = false;
+    dX = ballSpeedMedium;
+    dY = ballSpeedMedium;
+  } else if (rect3Over == true){
+    currentColor1 = rectColor;
+    currentColor2 = rectColor;
+    currentColor3 = rectHighlight;
+    levelEasy = false;
+    levelMedium = false;
+    levelHard = true;
+    dX = ballSpeedHard;
+    dY = ballSpeedHard;
+  } else {
+    currentColor1 = rectHighlight;
+    currentColor2 = rectColor;
+    currentColor3 = rectColor;
+    levelEasy = true;
+    levelMedium = false;
+    levelHard = false;
+    dX = ballSpeedEasy;
+    dY = ballSpeedEasy;
+  }
 }
+
+/*void mouseReleased(){
+   if (rect1Over == true){
+//    fill(rectHighlight);
+    levelEasy = true;
+    levelMedium = false;
+    levelHard = false;
+  } else if (rect2Over == true){
+//    fill(rectHighlight);
+    levelEasy = false;
+    levelMedium = true;
+    levelHard = false;
+  } else if (rect3Over == true){
+//    fill(rectHighlight);
+    levelEasy = false;
+    levelMedium = false;
+    levelHard = true;
+  } else {
+//    fill(rectHighlight);
+    levelEasy = true;
+    levelMedium = false;
+    levelHard = false;
+  }
+} */
 
 boolean overCircle(int x, int y, int diameter){
   float disX = x - mouseX;
   float disY = y - mouseY;
   if (sqrt(sq(disX) + sq(disY)) < diameter/2 ) {
+    return true;
+  } else {
+    return false;
+  }
+}
+
+boolean overRect(int x, int y, int width, int height){
+  if (mouseX >= x && mouseX <= x+width&& mouseY >= y && mouseY <= y+height){
     return true;
   } else {
     return false;
