@@ -106,6 +106,7 @@ void setup() {
   imgl3 = loadImage("loser3.jpg");
   imgl4 = loadImage("loser4.png");
   imgl5 = loadImage("loser5.jpg");
+
 }
 
 
@@ -208,7 +209,7 @@ void draw() {
   }
   */
   if (startgame == true){
-  /*  if (levelMedium == true){
+  /*  if (levelMedium == true && levelEasy==false && levelHard==false){
       dX = ballSpeedMedium;
       dY = ballSpeedMedium;
     }
@@ -339,36 +340,58 @@ void draw() {
         winner = "Player Two WINS!";
       }
       background(0,0,0);
+      fill(0,153,255);
       text(winner, 370, 250);
-      text(p1Score,445,300);
-      text("--", 475, 300);
-      text(p2Score, 525, 300);
-      text("Press 'space' to restart or 'enter' to end the game", 146, 500);
+      text(p1Score,445,350);
+      text("--", 475, 350);
+      text(p2Score, 525, 350);
+      text("Press 'space' to restart or 'enter' to end the game", 146, 675);
       
       if (winner == "Player One WINS!"){
+        scale(.80);
         image(imgw1, 0, 0);
-        image(imgw2, 0, 100);
-        image(imgw3, 0, 200);
-        image(imgw4, 0, 300);
-        image(imgw5, 0, 400);
+        scale(.77);
+        image(imgw2, 0, 300);
+        scale(.28);
+        image(imgw3, 0, 2000);
+        scale(.25);
+        image(imgw4, 4150, 3000);
+        scale(20);
+        image(imgw5, 200, 450);
 
-        image(imgl1, 350, 0); 
-        image(imgl2, 350, 100);
-        image(imgl3, 350, 200);
-        image(imgl4, 350, 300);
-        image(imgl5, 350, 400);
+        scale(1);
+        tint(255,255,255);
+        image(imgl1, 925, 450); 
+        scale(.5);
+        image(imgl2, 2040, 0);
+        scale(1.25);
+        image(imgl3, 1125, 800);
+        scale(1);
+        image(imgl4, 1200, 50);
+        scale(1.25);
+        image(imgl5, 990, 400);
       } 
       if (winner == "Player Two WINS!") {
-        image(imgw1, 350, 0);
-        image(imgw2, 350, 100);
-        image(imgw3, 350, 200);
-        image(imgw4, 350, 300);
-        image(imgw5, 350, 400);
+        scale(.80);
+        image(imgw1, 1028, 0);
+        scale(.77);
+        image(imgw2, 1215, 300);
+        scale(.28);
+        image(imgw3, 4895, 2100);
+        scale(.25);
+        image(imgw4, 15100, 2550);
+        scale(20);ass
+        image(imgw5, 730, 450);
 
-        image(imgl1, 0, 0); 
-        image(imgl2, 0, 100);
-        image(imgl3, 0, 200);
-        image(imgl4, 0, 300);
+        scale(1);
+        image(imgl1, 0, 450); 
+        scale(.5);
+        image(imgl2, 0, 0);
+        scale(1.25);
+        image(imgl3, 400, 800);
+        scale(1);
+        image(imgl4, 250, 50);
+        scale(1.25);
         image(imgl5, 0, 400);
       }
       noLoop();
@@ -424,8 +447,9 @@ void mousePressed(){
     levelEasy = true;
     levelMedium = false;
     levelHard = false;
-    dX = ballSpeedEasy;
-    dY = ballSpeedEasy;
+    dX = random(1,2); //ballSpeedEasy;
+    dY = random(1,2); //ballSpeedEasy;
+    
   } else if (rect2Over == true){
     currentColor1 = rectColor;
     currentColor2 = rectHighlight;
@@ -433,8 +457,8 @@ void mousePressed(){
     levelEasy = false;
     levelMedium = true;
     levelHard = false;
-    dX = ballSpeedMedium;
-    dY = ballSpeedMedium;
+    dX = random(11,12); //ballSpeedMedium;
+    dY = random(11,12); //ballSpeedMedium;
   } else if (rect3Over == true){
     currentColor1 = rectColor;
     currentColor2 = rectColor;
@@ -442,8 +466,8 @@ void mousePressed(){
     levelEasy = false;
     levelMedium = false;
     levelHard = true;
-    dX = ballSpeedHard;
-    dY = ballSpeedHard;
+    dX = random(21,22); //ballSpeedHard;
+    dY = random(21,11); //ballSpeedHard;
   } else {
     currentColor1 = rectHighlight;
     currentColor2 = rectColor;
@@ -451,8 +475,8 @@ void mousePressed(){
     levelEasy = true;
     levelMedium = false;
     levelHard = false;
-    dX = ballSpeedEasy;
-    dY = ballSpeedEasy;
+    dX = random(1,2); //ballSpeedEasy;
+    dY = random(1,2); //ballSpeedEasy;
   }
 }
 
