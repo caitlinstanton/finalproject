@@ -51,3 +51,6 @@ Enjoy!
 
 1/15 - Worked on sounds for ball bounces & images for winner/loser screen (EX) <br>
      - Got computer AI to work; just need to adjust where ball bounces on paddle and add flaws (CS) <br>
+ 
+1/18 - Finished end screen layout (EX) <br>
+     - Worked on different ball speeds for 3 different levels (EX) <br>
