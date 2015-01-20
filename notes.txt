@@ -6,6 +6,8 @@ CHECK THIS FOR HOW TO ADD SOUND
 MINIM LIBRARY
 http://www.cs.du.edu/~leut/1671/09_Fall/ProcessingNotes8.pdf
 
+add lag for computer 
+
 void update() {
 
 };
