@@ -1,6 +1,10 @@
 this is for notes aka small parts/ ideas for our game
      :)
 
+https://www.youtube.com/watch?v=yNsiBVlxO98
+CHECK THIS FOR HOW TO ADD SOUND
+MINIM LIBRARY
+
 
 void update() {
 
