@@ -1,3 +1,10 @@
+import ddf.minim.spi.*;
+import ddf.minim.signals.*;
+import ddf.minim.*;
+import ddf.minim.analysis.*;
+import ddf.minim.ugens.*;
+import ddf.minim.effects.*;
+
 //NEED TO DOWNLOAD SOUND LIBRARYYYYYYYYY
 //image stuff works, just need to set layout
 
@@ -13,8 +20,8 @@ float ballY = 350;
 float radius = 20;
 
 //MAY NEED TO TOGGLE SPEED
-float dX = random(4, 5);
-float dY = random(4, 5);
+float dX;
+float dY;
 
 float paddle1X = 50;
 float paddle2X = 934;
@@ -65,12 +72,6 @@ boolean rect3Over = false;
 boolean levelEasy = false;
 boolean levelMedium = false;
 boolean levelHard = false;
-
-float ballSpeed;
-float ballSpeedEasy = random(1,2);
-float ballSpeedMedium = random(4,5);
-float ballSpeedHard = random(9,10);
-
 
 void setup() {
   size(1000, 700);
@@ -141,41 +142,44 @@ void draw() {
   text("-", circle2X-1, 530+50);
   text("you play against a computer", 540, 560+50);
   
-  if (rect1Over == true){
-    fill(rectHighlight);
-    dX = ballSpeedEasy;
-    dY = ballSpeedEasy;
-  } else {
-    fill(currentColor1);
-  }
-  rect(rect1X, rectY, rectLength, rectHeight);
+  if (vsPlayer == true || vsComputer == true){
+    background(0);
   
-  if (rect2Over == true){
-    fill(rectHighlight);
-    dX = ballSpeedMedium;
-    dY = ballSpeedMedium;
-  } else {
+    if (rect1Over == true){
+      fill(rectHighlight);
+      dX = random(1,2);
+      dY = random(1,2);
+    } else {
+      fill(currentColor1);
+    }
+    rect(rect1X, rectY, rectLength, rectHeight);
+  
+    if (rect2Over == true){
+      fill(rectHighlight);
+      dX = random(4,5);
+      dY = random(4,5);
+    } else {
     fill(currentColor2);
-  }
-  rect(rect2X, rectY, rectLength, rectHeight);
+    }
+    rect(rect2X, rectY, rectLength, rectHeight);
  
-  if (rect3Over == true){
-    fill(rectHighlight);
-    dX = ballSpeedHard;
-    dY = ballSpeedHard;
-  } else {
-    fill(currentColor3);
-  }
-  rect(rect3X, rectY, rectLength, rectHeight); 
+    if (rect3Over == true){
+      fill(rectHighlight);
+      dX = random(9,10);
+      dY = random(9,10);
+    } else {
+      fill(currentColor3);
+    }
+    rect(rect3X, rectY, rectLength, rectHeight); 
   
-  fill(255,255,255);
-  textSize(20);
-  text("Select difficulty:", 200, 275);
-  textSize(15);
-  text("easy", 435, 275);
-  text("medium", 573, 275);
-  text("hard", 732, 275);
-  
+    fill(255,255,255);
+    textSize(20);
+    text("Select difficulty:", 200, 275);
+    textSize(15);
+    text("easy", 435, 275);
+    text("medium", 573, 275);
+    text("hard", 732, 275);
+
 /*  if (levelEasy == true){
     dX = ballSpeedEasy;
     dY = ballSpeedEasy;
@@ -208,6 +212,8 @@ void draw() {
     dY = ballSpeedHard;
   }
   */
+  }
+  
   if (startgame == true){
   /*  if (levelMedium == true && levelEasy==false && levelHard==false){
       dX = ballSpeedMedium;
@@ -380,7 +386,7 @@ void draw() {
         image(imgw3, 4895, 2100);
         scale(.25);
         image(imgw4, 15100, 2550);
-        scale(20);ass
+        scale(20);
         image(imgw5, 730, 450);
 
         scale(1);
@@ -432,15 +438,16 @@ void update(int x, int y) {
 void mousePressed(){
   if (circle1Over == true){
      //circle1Color = circle1Color+10;
-     startgame = true;
+     startgame = false;
      vsPlayer = true;
   }
   if (circle2Over == true){
     //circle2Color = circle2Color+10;
-    startgame = true;
+    startgame = false;
     vsComputer = true;
   }
   if (rect1Over == true){
+    startgame = true;
     currentColor1 = rectHighlight;
     currentColor2 = rectColor;
     currentColor3 = rectColor;
@@ -451,6 +458,7 @@ void mousePressed(){
     dY = random(1,2); //ballSpeedEasy;
     
   } else if (rect2Over == true){
+    startgame = true;
     currentColor1 = rectColor;
     currentColor2 = rectHighlight;
     currentColor3 = rectColor;
@@ -460,6 +468,7 @@ void mousePressed(){
     dX = random(11,12); //ballSpeedMedium;
     dY = random(11,12); //ballSpeedMedium;
   } else if (rect3Over == true){
+    startgame = true;
     currentColor1 = rectColor;
     currentColor2 = rectColor;
     currentColor3 = rectHighlight;
@@ -469,6 +478,7 @@ void mousePressed(){
     dX = random(21,22); //ballSpeedHard;
     dY = random(21,11); //ballSpeedHard;
   } else {
+    startgame = true;
     currentColor1 = rectHighlight;
     currentColor2 = rectColor;
     currentColor3 = rectColor;
