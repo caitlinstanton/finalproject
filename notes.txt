@@ -6,8 +6,11 @@ CHECK THIS FOR HOW TO ADD SOUND
 MINIM LIBRARY
 http://www.cs.du.edu/~leut/1671/09_Fall/ProcessingNotes8.pdf
 
-add lag for computer 
+add lag for computer or offset via random
 http://gamedev.stackexchange.com/questions/57352/imperfect-pong-ai
+http://www.jguru.com/article/client-side/artificial-intelligence-for-a-pong-like-game.html
+http://codeincomplete.com/posts/2011/5/14/javascript_pong/part5/
+http://forum.processing.org/two/discussion/2627/ai-for-a-pong-game/p1
 
 void update() {
 
