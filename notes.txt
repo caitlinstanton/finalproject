@@ -7,6 +7,7 @@ MINIM LIBRARY
 http://www.cs.du.edu/~leut/1671/09_Fall/ProcessingNotes8.pdf
 
 add lag for computer 
+http://gamedev.stackexchange.com/questions/57352/imperfect-pong-ai
 
 void update() {
 
