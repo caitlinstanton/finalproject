@@ -81,9 +81,9 @@ void setup() {
   circle1Highlight = color (255,100,100);
   circle2Highlight = color(0, 100, 255);
   circle1X = width/2 - circleSize*2;
-  circle1Y = height/2 + 80;
+  circle1Y = height/2;
   circle2X = width/2 + circleSize*2;
-  circle2Y = height/2 + 80;
+  circle2Y = height/2;
   
   rectColor = color(0,153,0);
   currentColor1 = currentColor2 = currentColor3 = rectColor;
@@ -134,13 +134,13 @@ void draw() {
   textSize(100);
   text("PONG", 356, 175);
   textSize(25);
-  text("You take the red pill", 180, 500+50); 
+  text("You take the red pill", 180, 500); 
   //146 if size 32
-  text("-", circle1X-1, 530+50);
-  text("you play against a player", 156, 560+50);
-  text("You take the blue pill", 575, 500+50);
-  text("-", circle2X-1, 530+50);
-  text("you play against a computer", 540, 560+50);
+  text("-", circle1X-1, 530);
+  text("you play against a player", 156, 560);
+  text("You take the blue pill", 575, 500);
+  text("-", circle2X-1, 530);
+  text("you play against a computer", 540, 560);
   
   if (vsPlayer == true || vsComputer == true){
     background(0);
@@ -152,7 +152,7 @@ void draw() {
     } else {
       fill(currentColor1);
     }
-    rect(rect1X, rectY, rectLength, rectHeight);
+    rect(rect1X, rectY+50, rectLength, rectHeight);
   
     if (rect2Over == true){
       fill(rectHighlight);
@@ -161,7 +161,7 @@ void draw() {
     } else {
     fill(currentColor2);
     }
-    rect(rect2X, rectY, rectLength, rectHeight);
+    rect(rect2X, rectY+50, rectLength, rectHeight);
  
     if (rect3Over == true){
       fill(rectHighlight);
@@ -170,15 +170,15 @@ void draw() {
     } else {
       fill(currentColor3);
     }
-    rect(rect3X, rectY, rectLength, rectHeight); 
+    rect(rect3X, rectY+50, rectLength, rectHeight); 
   
     fill(255,255,255);
     textSize(20);
-    text("Select difficulty:", 200, 275);
+    text("Select difficulty:", 200, 275+50);
     textSize(15);
-    text("easy", 435, 275);
-    text("medium", 573, 275);
-    text("hard", 732, 275);
+    text("easy", 435, 275+50);
+    text("medium", 573, 275+50);
+    text("hard", 732, 275+50);
 
 /*  if (levelEasy == true){
     dX = ballSpeedEasy;
@@ -283,7 +283,7 @@ void draw() {
     ballY = ballY + dY;
     
     /*************************** vs Player *****************************/
-    if (vsPlayer == true) {
+    if (vsPlayer == true && startgame == true) {
       if (paddle1Up == true) {
         if (paddle1Y - paddleSpeed > 0) {
           paddle1Y = paddle1Y - paddleSpeed;
@@ -315,7 +315,7 @@ void draw() {
     /****************************** vs Computer ****************************/
     //FIX COMPUTER PLAYER THING UGH
  
-    if (vsComputer == true) {
+    if (vsComputer == true && startgame == true) {
     move();
       if (paddle1Up == true) {
         if (paddle1Y - paddleSpeed > 0) {
@@ -446,47 +446,40 @@ void mousePressed(){
     startgame = false;
     vsComputer = true;
   }
-  if (rect1Over == true){
-    startgame = true;
-    currentColor1 = rectHighlight;
-    currentColor2 = rectColor;
-    currentColor3 = rectColor;
-    levelEasy = true;
-    levelMedium = false;
-    levelHard = false;
-    dX = random(1,2); //ballSpeedEasy;
-    dY = random(1,2); //ballSpeedEasy;
-    
-  } else if (rect2Over == true){
-    startgame = true;
-    currentColor1 = rectColor;
-    currentColor2 = rectHighlight;
-    currentColor3 = rectColor;
-    levelEasy = false;
-    levelMedium = true;
-    levelHard = false;
-    dX = random(11,12); //ballSpeedMedium;
-    dY = random(11,12); //ballSpeedMedium;
-  } else if (rect3Over == true){
-    startgame = true;
-    currentColor1 = rectColor;
-    currentColor2 = rectColor;
-    currentColor3 = rectHighlight;
-    levelEasy = false;
-    levelMedium = false;
-    levelHard = true;
-    dX = random(21,22); //ballSpeedHard;
-    dY = random(21,11); //ballSpeedHard;
-  } else {
-    startgame = true;
-    currentColor1 = rectHighlight;
-    currentColor2 = rectColor;
-    currentColor3 = rectColor;
-    levelEasy = true;
-    levelMedium = false;
-    levelHard = false;
-    dX = random(1,2); //ballSpeedEasy;
-    dY = random(1,2); //ballSpeedEasy;
+  if (vsPlayer == true || vsComputer == true){
+    if (rect1Over == true){
+      startgame = true;
+      currentColor1 = rectHighlight;
+      currentColor2 = rectColor;
+      currentColor3 = rectColor;
+      levelEasy = true;
+      levelMedium = false;
+      levelHard = false;
+      dX = random(1,2); //ballSpeedEasy;
+      dY = random(1,2); //ballSpeedEasy;
+    } else if (rect2Over == true){
+      startgame = true;
+      currentColor1 = rectColor;
+      currentColor2 = rectHighlight;
+      currentColor3 = rectColor;
+      levelEasy = false;
+      levelMedium = true;
+      levelHard = false;
+      dX = random(11,12); //ballSpeedMedium;
+      dY = random(11,12); //ballSpeedMedium;
+    } else if (rect3Over == true){
+      startgame = true;
+      currentColor1 = rectColor;
+      currentColor2 = rectColor;
+      currentColor3 = rectHighlight;
+      levelEasy = false;
+      levelMedium = false;
+      levelHard = true;
+      dX = random(21,22); //ballSpeedHard;
+      dY = random(21,11); //ballSpeedHard;
+    } else {
+      startgame = false;
+    }
   }
 }
 
