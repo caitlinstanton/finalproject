@@ -17,11 +17,14 @@ PImage imgl1, imgl2, imgl3, imgl4, imgl5;
 //ballX and ballY start the ball in the middle of the screen
 float ballX = 500;
 float ballY = 350;
+float invisibleBallX = 300;
+float invisibleBallY = 350;
 float radius = 20;
 
-//MAY NEED TO TOGGLE SPEED
 float dX;
 float dY;
+float invisibleX;
+float invisibleY;
 
 float paddle1X = 50;
 float paddle2X = 934;
@@ -91,7 +94,7 @@ void setup() {
   rect1X = 400;
   rect2X = 550;
   rect3X = 700;
-  rectY = 255;
+  rectY = 255+50;
   
 //  paddlesound = new SoundFile(this, "mushroom.wav");
 //  wallsound = new SoundFile(this,"beeping.flac");
@@ -112,7 +115,7 @@ void setup() {
 
 
 void draw() { 
-//  background(34);
+
   update (mouseX, mouseY);
   background(0);
   
@@ -135,7 +138,6 @@ void draw() {
   text("PONG", 356, 175);
   textSize(25);
   text("You take the red pill", 180, 500); 
-  //146 if size 32
   text("-", circle1X-1, 530);
   text("you play against a player", 156, 560);
   text("You take the blue pill", 575, 500);
@@ -144,24 +146,28 @@ void draw() {
   
   if (vsPlayer == true || vsComputer == true){
     background(0);
-  
+    
     if (rect1Over == true){
       fill(rectHighlight);
       dX = random(1,2);
       dY = random(1,2);
+      invisibleX = dX + random(2,3);
+      invisibleY = dY + random(2,3);
     } else {
       fill(currentColor1);
     }
-    rect(rect1X, rectY+50, rectLength, rectHeight);
+    rect(rect1X, rectY, rectLength, rectHeight);
   
     if (rect2Over == true){
       fill(rectHighlight);
       dX = random(4,5);
       dY = random(4,5);
+      invisibleX = dX + random(2,3);
+      invisibleY = dY + random(2,3);
     } else {
     fill(currentColor2);
     }
-    rect(rect2X, rectY+50, rectLength, rectHeight);
+    rect(rect2X, rectY, rectLength, rectHeight);
  
     if (rect3Over == true){
       fill(rectHighlight);
@@ -170,7 +176,7 @@ void draw() {
     } else {
       fill(currentColor3);
     }
-    rect(rect3X, rectY+50, rectLength, rectHeight); 
+    rect(rect3X, rectY, rectLength, rectHeight); 
   
     fill(255,255,255);
     textSize(20);
@@ -179,61 +185,20 @@ void draw() {
     text("easy", 435, 275+50);
     text("medium", 573, 275+50);
     text("hard", 732, 275+50);
-
-/*  if (levelEasy == true){
-    dX = ballSpeedEasy;
-    dY = ballSpeedEasy;
-}
-*/
- /* if (levelMedium == true){
-    dX = ballSpeedMedium;
-    dY = ballSpeedMedium;
-  }
-  if (levelHard == true){
-    dX = ballSpeedHard;
-    dY = ballSpeedHard;
-  }
-  if (levelEasy == true){
-    dX = ballSpeedEasy;
-    dY = ballSpeedEasy;
-  }*/
-  
-  
- /* if (currentColor1 == rectHighlight){
-    dX = ballSpeedEasy;
-    dY = ballSpeedEasy;
-  }
-  if (currentColor2 == rectHighlight){
-    dX = ballSpeedMedium;
-    dY = ballSpeedMedium;
-  } 
-  if (currentColor3 == rectHighlight) {
-    dX = ballSpeedHard;
-    dY = ballSpeedHard;
-  }
-  */
   }
   
   if (startgame == true){
-  /*  if (levelMedium == true && levelEasy==false && levelHard==false){
-      dX = ballSpeedMedium;
-      dY = ballSpeedMedium;
-    }
-    if (levelHard == true){
-      dX = ballSpeedHard;
-      dX = ballSpeedHard;
-    }
-    if (levelEasy == true){
-      dX = ballSpeedEasy;
-      dY = ballSpeedEasy;
-    }
-    */
     
     //Defines edges of paddles and ball in order to ensure realistic bouncing
       float ballLeftEdge = ballX - radius + dX;
       float ballRightEdge = ballX + radius + dX;
       float ballTopEdge = ballY - radius + dY;
       float ballBottomEdge = ballY + radius + dY;
+      
+      float invisibleBallLeftEdge = invisibleBallX - radius + invisibleX;
+      float invisibleBallRightEdge = invisibleBallX + radius + invisibleX;
+      float invisibleBallTopEdge = invisibleBallY - radius + invisibleY;
+      float invisibleBallBottomEdge = invisibleBallY + radius + invisibleY;
   
       float p1RightEdge = paddle1X + paddleWidth;
       float p1TopEdge = paddle1Y;
@@ -248,8 +213,14 @@ void draw() {
       rect(p1RightEdge,0,2,height);
       rect(p2LeftEdge,0,2,height);
       
+      //REAL BALL
       fill(255,255,255);
       ellipse(ballX, ballY, radius, radius);
+      if (vsComputer == true) {
+        //INVISIBLE BALL FOR COMPUTER MOVES
+        fill(40,40,40);
+        ellipse(invisibleBallX, invisibleBallY, radius,radius);
+      }
       
     //How ball interacts with sides of the screen and paddles
     //bottom and top edge of screen
@@ -278,9 +249,31 @@ void draw() {
 //        paddlesound.play();
       }
     }
+    
+    if  (invisibleBallTopEdge < 0 || invisibleBallBottomEdge > height) {
+      invisibleY = -invisibleY;
+    }
+    if (invisibleBallLeftEdge < p1RightEdge) {
+      if (invisibleBallTopEdge > p1BottomEdge || invisibleBallBottomEdge < p1TopEdge) {
+        invisibleBallX = 500;
+        invisibleBallY = 350;
+      } else {
+        invisibleX = -invisibleX;
+      }
+    }
+     if (invisibleBallRightEdge > p2LeftEdge) {
+      if (invisibleBallTopEdge > p2BottomEdge || invisibleBallBottomEdge < p2TopEdge) {
+        invisibleBallX = 500;
+        invisibleBallY = 350;
+      } else {
+        invisibleX = -invisibleX;
+      }
+    }
   
     ballX = ballX + dX;
     ballY = ballY + dY;
+    invisibleBallX = invisibleBallX + invisibleX;
+    invisibleBallY = invisibleBallY + invisibleY;
     
     /*************************** vs Player *****************************/
     if (vsPlayer == true && startgame == true) {
@@ -337,7 +330,7 @@ void draw() {
   }
   
   
-    if (p1Score == 1 || p2Score == 1) {
+    if (p1Score == 5 || p2Score == 5) {
       startgame = false;
       if (p1Score > p2Score) {
         winner = "Player One WINS!";
@@ -437,12 +430,10 @@ void update(int x, int y) {
 
 void mousePressed(){
   if (circle1Over == true){
-     //circle1Color = circle1Color+10;
      startgame = false;
      vsPlayer = true;
   }
   if (circle2Over == true){
-    //circle2Color = circle2Color+10;
     startgame = false;
     vsComputer = true;
   }
@@ -455,8 +446,10 @@ void mousePressed(){
       levelEasy = true;
       levelMedium = false;
       levelHard = false;
-      dX = random(1,2); //ballSpeedEasy;
-      dY = random(1,2); //ballSpeedEasy;
+      dX = random(1,2); //ball speed = easy
+      dY = random(1,2); //ball speed = easy
+      invisibleX = dX + 1.5;
+      invisibleY = dY + 1.5;
     } else if (rect2Over == true){
       startgame = true;
       currentColor1 = rectColor;
@@ -465,8 +458,10 @@ void mousePressed(){
       levelEasy = false;
       levelMedium = true;
       levelHard = false;
-      dX = random(11,12); //ballSpeedMedium;
-      dY = random(11,12); //ballSpeedMedium;
+      dX = random(11,12); //ball speed = medium
+      dY = random(11,12); //ball speed = medium
+      invisibleX = dX + 1.5;
+      invisibleY = dY + 1.5;
     } else if (rect3Over == true){
       startgame = true;
       currentColor1 = rectColor;
@@ -475,37 +470,15 @@ void mousePressed(){
       levelEasy = false;
       levelMedium = false;
       levelHard = true;
-      dX = random(21,22); //ballSpeedHard;
-      dY = random(21,11); //ballSpeedHard;
+      dX = random(21,22); //ball speed = hard
+      dY = random(21,11); //ball speed = hard
+      invisibleX = dX + 1.5;
+      invisibleY = dY + 1.5;
     } else {
       startgame = false;
     }
   }
 }
-
-/*void mouseReleased(){
-   if (rect1Over == true){
-//    fill(rectHighlight);
-    levelEasy = true;
-    levelMedium = false;
-    levelHard = false;
-  } else if (rect2Over == true){
-//    fill(rectHighlight);
-    levelEasy = false;
-    levelMedium = true;
-    levelHard = false;
-  } else if (rect3Over == true){
-//    fill(rectHighlight);
-    levelEasy = false;
-    levelMedium = false;
-    levelHard = true;
-  } else {
-//    fill(rectHighlight);
-    levelEasy = true;
-    levelMedium = false;
-    levelHard = false;
-  }
-} */
 
 boolean overCircle(int x, int y, int diameter){
   float disX = x - mouseX;
@@ -525,7 +498,6 @@ boolean overRect(int x, int y, int width, int height){
   }
 }
 
-//FIX PADDLE MOVEMENT
 void keyPressed(){
   if (keyCode == UP){
     if (paddle2Y >= 0) {
@@ -571,13 +543,13 @@ void keyReleased() {
 public void move () {
 // calculate the middle of the paddle 
   float middleY = paddle2Y + (paddleHeight / 2); 
-
+  
   //Ball is moving away from the paddle
   //Poses no danger to the computer
-  if (ballX < 500) {
+  if (invisibleBallX < 500) {
     // if the paddle's position is over the middle y - position 
     if (paddle2Y < 148) {
-      paddle2Y = paddle2Y + paddleSpeed; 
+      paddle2Y = paddle2Y + paddleSpeed;
     } 
 // Paddle is under the middle y - position 
     else if (paddle2Y > 152) {
@@ -585,74 +557,17 @@ public void move () {
     }
   } 
 // ball is moving towards paddle 
-  else if (ballX > 500) {
+  else if (invisibleBallX > 500) {
 // As long as ball's y - position and paddle's y - position are different 
-    if (paddle2Y != ballY) {
+    if (paddle2Y != invisibleBallY) {
 // If ball's position smaller than paddle's, move up 
-      if (ballY < paddle2Y) {
+      if (invisibleBallY < paddle2Y) {
         paddle2Y = paddle2Y - paddleSpeed; 
       } 
 // If ball's position greater than paddle's, move down 
-      else if (ballY > paddle2Y) {
+      else if (invisibleBallY > paddle2Y) {
         paddle2Y = paddle2Y + paddleSpeed; 
       } 
     }
   }
 }
- 
-class paddle { 
-  float ypos, xpos; 
-  boolean Cgoingdown = true;
-  paddle (float x, float y) {  
-    ypos = y; 
-    xpos = x;
-  } 
-  void update() { 
-    /*
-    if (Cgoingdown == true){
-        if (ypos >= 700){
-          ypos = ypos + 1;;
-        } else {
-          Cgoingdown = false;
-        }
-      } else {
-        if (ypos <= 0){
-          ypos = ypos - 1;
-        } else {
-          Cgoingdown = true;
-        }
-      }
-    */
-    if (0 < ypos && ypos <= 300 && Cgoingdown == true) {
-      ypos = ypos + 1;
-    } else if (ypos <= 299 && ypos > 0 && Cgoingdown == false) {
-      ypos = ypos - 1;
-    } else {
-      Cgoingdown = !Cgoingdown;
-    
-    rect(xpos,ypos,15,100);
-    }
-  }
-}
-
-/* using Caitlin's class stuff
-void computermoves (){
-  boolean Cgoingdown = true;
-  if (Cgoingdown == true){
-    if (h2.ypos >= 700){
-      h2.ypos++;
-    }
-    else {
-      Cgoingdown = false;
-    }
-  }
-  else {
-    if (h2.ypos <= 0){
-      h2.ypos--;
-    }
-    else {
-      Cgoingdown = true;
-    }
-  }
-};
-*/
