@@ -55,7 +55,11 @@ Enjoy!
  
 1/18 - Finished end screen layout (EX) <br>
      - Worked on different ball speeds for 3 different levels (EX) <br>
-     - Started figuring out how to add sounds (CS) <br>
 
 1/20 - Separated start and level screens (EX) <br>
      - Got ball speeds to work (EX) <br>
+     - Started figuring out how to add sounds (CS) <br>
+
+1/21 - Fixed level screen (EX) <br>
+     - Working on computer AI lag using a invisible ball (CS) <br>
+     - Worked on sound code (EX) <br>
