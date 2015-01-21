@@ -54,3 +54,6 @@ Enjoy!
  
 1/18 - Finished end screen layout (EX) <br>
      - Worked on different ball speeds for 3 different levels (EX) <br>
+
+1/20 - Separated start and level screens (EX)
+     - Got ball speeds to work (EX)
