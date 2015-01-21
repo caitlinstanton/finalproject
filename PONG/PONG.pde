@@ -112,7 +112,7 @@ void setup() {
   imgl5 = loadImage("loser5.jpg");
 
 }
-
+{}
 
 void draw() { 
 
