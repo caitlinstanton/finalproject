@@ -3,11 +3,11 @@
 Period 1 <br>
 Emily Xu and Caitlin Stanton <br>
 
-What our product does: <br>
+<h1> What our product does: </h1>
 It is a version of the popular game, Pong. There is a two-player version and a one-player version, one of which
 can be selected at the start of the game.
 
-How to run it: <br>
+<h1> How to run it: </h1>
 At the start of the game, a screen will pop up, asking you to choose between a red pill and a blue pill.
 Click on the red pill if you wish to play against another person. Click the blue pill if you wish to play
 against a computer.
