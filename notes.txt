@@ -6,6 +6,29 @@ CHECK THIS FOR HOW TO ADD SOUND
 MINIM LIBRARY
 http://www.cs.du.edu/~leut/1671/09_Fall/ProcessingNotes8.pdf
 
+
+sound stuff:
+
+import ddf.minim.*;
+import ________
+import ________
+import ________
+
+Minim minim;
+AudioPlayer soundPaddles, soundWalls;
+
+void setup(){
+     minim = new Minim(this);
+     soundPaddles = minim.loadFile("mushroom.wav");
+     soundWalls = minim.loadFile("beeping.flac");
+}
+
+|soundPaddles.play();   
+|soundWalls.play();
+^ put this stuff where the ball hits the paddles and/or walls
+
+
+
 add lag for computer or offset via random
 http://gamedev.stackexchange.com/questions/57352/imperfect-pong-ai
 http://www.jguru.com/article/client-side/artificial-intelligence-for-a-pong-like-game.html
