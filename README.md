@@ -5,7 +5,8 @@ Emily Xu and Caitlin Stanton <br>
 
 <h1> What our product does: </h1>
 It is a version of the popular game, Pong. There is a two-player version and a one-player version, one of which
-can be selected at the start of the game.
+can be selected at the start of the game. Once you have selected the number of players, you will be able to choose
+at which level you wish to play, where a harder level results in a faster-moving ball.
 
 <h1> How to run it: </h1>
 At the start of the game, a screen will pop up, asking you to choose between a red pill and a blue pill.
