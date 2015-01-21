@@ -54,6 +54,7 @@ Enjoy!
  
 1/18 - Finished end screen layout (EX) <br>
      - Worked on different ball speeds for 3 different levels (EX) <br>
+     - Started figuring out how to add sounds (CS) <br>
 
-1/20 - Separated start and level screens (EX)
-     - Got ball speeds to work (EX)
+1/20 - Separated start and level screens (EX) <br>
+     - Got ball speeds to work (EX) <br>
