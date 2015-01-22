@@ -8,11 +8,6 @@ import ddf.minim.effects.*;
 Minim minim;
 AudioPlayer soundPaddles, soundWalls;
 
-//NEED TO DOWNLOAD SOUND LIBRARYYYYYYYYY
-//image stuff works, just need to set layout
-
-//import processing.sound.*;
-//SoundFile paddlesound, wallsound;
 PImage imgw1, imgw2, imgw3, imgw4, imgw5;
 PImage imgl1, imgl2, imgl3, imgl4, imgl5;
 
@@ -20,14 +15,10 @@ PImage imgl1, imgl2, imgl3, imgl4, imgl5;
 //ballX and ballY start the ball in the middle of the screen
 float ballX = 500;
 float ballY = 350;
-float invisibleBallX = 300;
-float invisibleBallY = 350;
 float radius = 20;
 
 float dX;
 float dY;
-float invisibleX = dX + 0.5;
-float invisibleY = dY + 0.5;
 
 float paddle1X = 50;
 float paddle2X = 934;
@@ -98,9 +89,6 @@ void setup() {
   rect3X = 700;
   rectY = 255+50;
   
-//  paddlesound = new SoundFile(this, "mushroom.wav");
-//  wallsound = new SoundFile(this,"beeping.flac");
-  
   imgw1 = loadImage("winner1.jpg");
   imgw2 = loadImage("winner2.jpg");
   imgw3 = loadImage("winner3.jpg");
@@ -119,7 +107,6 @@ void setup() {
 }
 
 void draw() { 
-
   update (mouseX, mouseY);
   background(0);
   
@@ -201,8 +188,7 @@ void draw() {
       rect(500,0,5,height);
       rect(p1RightEdge,0,2,height);
       rect(p2LeftEdge,0,2,height);
-      
-      //REAL BALL
+
       fill(255,255,255);
       ellipse(ballX, ballY, radius, radius);
       
@@ -268,8 +254,6 @@ void draw() {
     }
     
     /****************************** vs Computer ****************************/
-    //FIX COMPUTER PLAYER THING UGH
- 
     if (vsComputer == true && startgame == true) {
     move();
       if (paddle1Up == true) {
