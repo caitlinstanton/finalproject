@@ -5,6 +5,9 @@ import ddf.minim.analysis.*;
 import ddf.minim.ugens.*;
 import ddf.minim.effects.*;
 
+Minim minim;
+AudioPlayer soundPaddles, soundWalls;
+
 //NEED TO DOWNLOAD SOUND LIBRARYYYYYYYYY
 //image stuff works, just need to set layout
 
@@ -204,7 +207,7 @@ void draw() {
     //bottom and top edge of screen
     if (ballTopEdge < 0 || ballBottomEdge > height) {
       dY = -dY;
-//      wallsound.play();
+      soundWalls.play();
     }
     //interacting with paddle edges
     if (ballLeftEdge < p1RightEdge) {
@@ -214,7 +217,7 @@ void draw() {
         ballY = 350;
       } else {
         dX = -dX;
-//        paddlesound.play();
+        soundPaddles.play();
       }
     }
     if (ballRightEdge > p2LeftEdge) {
@@ -224,7 +227,7 @@ void draw() {
         ballY = 350;
       } else {
         dX = -dX;
-//        paddlesound.play();
+        soundPaddles.play();
       }
     }
   
@@ -361,6 +364,10 @@ void draw() {
       noLoop();
     }
    }
+   
+  minim = new Minim(this);
+  soundPaddles = minim.loadFile("mushroom.wav");
+  soundWalls = minim.loadFile("beeping.flac");
 }
 
 void update(int x, int y) {
