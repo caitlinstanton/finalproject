@@ -285,9 +285,15 @@ void draw() {
         levelHard = false;
       if (p1Score > p2Score) {
         winner = "Player One WINS!";
+        rect1Over = false;
+        rect2Over = false;
+        rect3Over = false;
       }
       if (p2Score > p1Score) {
         winner = "Player Two WINS!";
+        rect1Over = false;
+        rect2Over = false;
+        rect3Over = false;
       }
       background(0,0,0);
       fill(0,153,255);
