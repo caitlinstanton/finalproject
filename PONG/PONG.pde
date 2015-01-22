@@ -23,8 +23,8 @@ float radius = 20;
 
 float dX;
 float dY;
-float invisibleX;
-float invisibleY;
+float invisibleX = dX + 0.5;
+float invisibleY = dY + 0.5;
 
 float paddle1X = 50;
 float paddle2X = 934;
@@ -57,7 +57,6 @@ boolean circle2Over = false;
 boolean startgame = false;
 boolean vsPlayer = false;
 boolean vsComputer = false;
-// need to differentiate btw player vs. computer && player vs. player
 
 int rect1X;
 int rect2X;
@@ -112,7 +111,6 @@ void setup() {
   imgl5 = loadImage("loser5.jpg");
 
 }
-{}
 
 void draw() { 
 
@@ -146,13 +144,9 @@ void draw() {
   
   if (vsPlayer == true || vsComputer == true){
     background(0);
-    
+
     if (rect1Over == true){
       fill(rectHighlight);
-      dX = random(1,2);
-      dY = random(1,2);
-      invisibleX = dX + random(2,3);
-      invisibleY = dY + random(2,3);
     } else {
       fill(currentColor1);
     }
@@ -160,10 +154,6 @@ void draw() {
   
     if (rect2Over == true){
       fill(rectHighlight);
-      dX = random(4,5);
-      dY = random(4,5);
-      invisibleX = dX + random(2,3);
-      invisibleY = dY + random(2,3);
     } else {
     fill(currentColor2);
     }
@@ -171,8 +161,6 @@ void draw() {
  
     if (rect3Over == true){
       fill(rectHighlight);
-      dX = random(9,10);
-      dY = random(9,10);
     } else {
       fill(currentColor3);
     }
@@ -195,11 +183,6 @@ void draw() {
       float ballTopEdge = ballY - radius + dY;
       float ballBottomEdge = ballY + radius + dY;
       
-      float invisibleBallLeftEdge = invisibleBallX - radius + invisibleX;
-      float invisibleBallRightEdge = invisibleBallX + radius + invisibleX;
-      float invisibleBallTopEdge = invisibleBallY - radius + invisibleY;
-      float invisibleBallBottomEdge = invisibleBallY + radius + invisibleY;
-  
       float p1RightEdge = paddle1X + paddleWidth;
       float p1TopEdge = paddle1Y;
       float p1BottomEdge = paddle1Y + paddleHeight;
@@ -216,11 +199,6 @@ void draw() {
       //REAL BALL
       fill(255,255,255);
       ellipse(ballX, ballY, radius, radius);
-      if (vsComputer == true) {
-        //INVISIBLE BALL FOR COMPUTER MOVES
-        fill(40,40,40);
-        ellipse(invisibleBallX, invisibleBallY, radius,radius);
-      }
       
     //How ball interacts with sides of the screen and paddles
     //bottom and top edge of screen
@@ -249,32 +227,10 @@ void draw() {
 //        paddlesound.play();
       }
     }
-    
-    if  (invisibleBallTopEdge < 0 || invisibleBallBottomEdge > height) {
-      invisibleY = -invisibleY;
-    }
-    if (invisibleBallLeftEdge < p1RightEdge) {
-      if (invisibleBallTopEdge > p1BottomEdge || invisibleBallBottomEdge < p1TopEdge) {
-        invisibleBallX = 500;
-        invisibleBallY = 350;
-      } else {
-        invisibleX = -invisibleX;
-      }
-    }
-     if (invisibleBallRightEdge > p2LeftEdge) {
-      if (invisibleBallTopEdge > p2BottomEdge || invisibleBallBottomEdge < p2TopEdge) {
-        invisibleBallX = 500;
-        invisibleBallY = 350;
-      } else {
-        invisibleX = -invisibleX;
-      }
-    }
   
     ballX = ballX + dX;
     ballY = ballY + dY;
-    invisibleBallX = invisibleBallX + invisibleX;
-    invisibleBallY = invisibleBallY + invisibleY;
-    
+
     /*************************** vs Player *****************************/
     if (vsPlayer == true && startgame == true) {
       if (paddle1Up == true) {
@@ -331,7 +287,12 @@ void draw() {
   
   
     if (p1Score == 5 || p2Score == 5) {
-      startgame = false;
+        vsPlayer = false;
+        vsComputer = false;
+        startgame = false;
+        levelEasy = false;
+        levelMedium = false;
+        levelHard = false;
       if (p1Score > p2Score) {
         winner = "Player One WINS!";
       }
@@ -393,6 +354,10 @@ void draw() {
         scale(1.25);
         image(imgl5, 0, 400);
       }
+      p1Score = 0;
+      p2Score = 0;
+      paddle1X = 50;
+      paddle2X = 934;
       noLoop();
     }
    }
@@ -438,6 +403,7 @@ void mousePressed(){
     vsComputer = true;
   }
   if (vsPlayer == true || vsComputer == true){
+    float speed;
     if (rect1Over == true){
       startgame = true;
       currentColor1 = rectHighlight;
@@ -446,10 +412,9 @@ void mousePressed(){
       levelEasy = true;
       levelMedium = false;
       levelHard = false;
-      dX = random(1,2); //ball speed = easy
-      dY = random(1,2); //ball speed = easy
-      invisibleX = dX + 1.5;
-      invisibleY = dY + 1.5;
+      speed = random(1,2) * -1;
+      dX = speed; //ball speed = easy
+      dY = speed; //ball speed = easy
     } else if (rect2Over == true){
       startgame = true;
       currentColor1 = rectColor;
@@ -458,10 +423,9 @@ void mousePressed(){
       levelEasy = false;
       levelMedium = true;
       levelHard = false;
-      dX = random(11,12); //ball speed = medium
-      dY = random(11,12); //ball speed = medium
-      invisibleX = dX + 1.5;
-      invisibleY = dY + 1.5;
+      speed = random(4,5) * -1;
+      dX = speed; //ball speed = medium
+      dY = speed; //ball speed = medium
     } else if (rect3Over == true){
       startgame = true;
       currentColor1 = rectColor;
@@ -470,10 +434,9 @@ void mousePressed(){
       levelEasy = false;
       levelMedium = false;
       levelHard = true;
-      dX = random(21,22); //ball speed = hard
-      dY = random(21,11); //ball speed = hard
-      invisibleX = dX + 1.5;
-      invisibleY = dY + 1.5;
+      speed = random(9,10) * -1;
+      dX = speed; //ball speed = hard
+      dY = speed; //ball speed = hard
     } else {
       startgame = false;
     }
@@ -515,9 +478,17 @@ void keyPressed(){
     if (paddle1Y < height) {
       paddle1Down = true;
     }
-  } else if (keyCode == 32) {
+  } else if (keyCode == 32 && winner.equals("") == false) {
     p1Score = 0;
     p2Score = 0;
+    paddle1Y = 350;
+    paddle2Y = 350;
+    vsPlayer = false;
+    vsComputer = false;
+    startgame = false;
+    levelEasy = false;
+    levelMedium = false;
+    levelHard = false;
     loop();
   } else if (keyCode == ENTER && winner.equals("") == false){
     exit();
@@ -546,26 +517,26 @@ public void move () {
   
   //Ball is moving away from the paddle
   //Poses no danger to the computer
-  if (invisibleBallX < 500) {
+  if (ballX < 500) {
     // if the paddle's position is over the middle y - position 
-    if (paddle2Y < 148) {
+    if (paddle2Y < 350) {
       paddle2Y = paddle2Y + paddleSpeed;
     } 
 // Paddle is under the middle y - position 
-    else if (paddle2Y > 152) {
+    else if (paddle2Y > 350) {
       paddle2Y = paddle2Y - paddleSpeed; 
     }
   } 
 // ball is moving towards paddle 
-  else if (invisibleBallX > 500) {
+  else if (ballX > 500) {
 // As long as ball's y - position and paddle's y - position are different 
-    if (paddle2Y != invisibleBallY) {
+    if (paddle2Y != ballY) {
 // If ball's position smaller than paddle's, move up 
-      if (invisibleBallY < paddle2Y) {
+      if (ballY < paddle2Y - (paddleHeight / 3)) {
         paddle2Y = paddle2Y - paddleSpeed; 
       } 
 // If ball's position greater than paddle's, move down 
-      else if (invisibleBallY > paddle2Y) {
+      else if (ballY > paddle2Y + (paddleHeight / 3)) {
         paddle2Y = paddle2Y + paddleSpeed; 
       } 
     }
