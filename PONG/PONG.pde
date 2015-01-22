@@ -166,6 +166,24 @@ void draw() {
     text("easy", 435, 275+50);
     text("medium", 573, 275+50);
     text("hard", 732, 275+50);
+    
+    if (vsPlayer = true){
+      textSize(15);
+      text("For Player 1:", 250, 500);
+      text("Press 'W' for up", 250, 550);
+      text("Press 'S' for down", 250, 600);
+      text("For Player 2:", 450, 500);
+      text("Press 'UP' for up", 450, 550);
+      text("Press 'DOWN' for down", 450, 600);
+    }
+    
+    if (vsComputer = true){
+      textSize(15);
+      text("For Player 1:", 250, 500);
+      text("Press 'W' for up", 250, 550);
+      text("Press 'S' for down", 250, 600);
+      text("Player 2 is the computer", 450,500);
+    }
   }
   
   if (startgame == true){
