@@ -113,6 +113,9 @@ void setup() {
   imgl4 = loadImage("loser4.png");
   imgl5 = loadImage("loser5.jpg");
 
+  minim = new Minim(this);
+  soundPaddles = minim.loadFile("mushroom.wav");
+  //soundWalls = minim.loadFile("beeping.flac");
 }
 
 void draw() { 
@@ -207,7 +210,7 @@ void draw() {
     //bottom and top edge of screen
     if (ballTopEdge < 0 || ballBottomEdge > height) {
       dY = -dY;
-      soundWalls.play();
+      //soundWalls.play();
     }
     //interacting with paddle edges
     if (ballLeftEdge < p1RightEdge) {
@@ -364,10 +367,6 @@ void draw() {
       noLoop();
     }
    }
-   
-  minim = new Minim(this);
-  soundPaddles = minim.loadFile("mushroom.wav");
-  soundWalls = minim.loadFile("beeping.flac");
 }
 
 void update(int x, int y) {
