@@ -63,3 +63,4 @@ Enjoy!
 1/21 - Fixed level screen (EX) <br>
      - Working on computer AI lag using a invisible ball (CS) <br>
      - Worked on sound code (EX) <br>
+     - Made relatively imperfect AI (CS) <br>
