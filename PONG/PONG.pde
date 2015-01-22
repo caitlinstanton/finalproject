@@ -532,11 +532,11 @@ public void move () {
 // As long as ball's y - position and paddle's y - position are different 
     if (paddle2Y != ballY) {
 // If ball's position smaller than paddle's, move up 
-      if (ballY < paddle2Y - (paddleHeight / 3)) {
+      if (ballY < paddle2Y - (paddleHeight / 4)) {
         paddle2Y = paddle2Y - paddleSpeed; 
       } 
 // If ball's position greater than paddle's, move down 
-      else if (ballY > paddle2Y + (paddleHeight / 3)) {
+      else if (ballY > paddle2Y + (paddleHeight / 4)) {
         paddle2Y = paddle2Y + paddleSpeed; 
       } 
     }
