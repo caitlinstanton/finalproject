@@ -103,7 +103,7 @@ void setup() {
 
   minim = new Minim(this);
   soundPaddles = minim.loadFile("mushroom.wav");
-  //soundWalls = minim.loadFile("beeping.flac");
+  soundWalls = minim.loadFile("button.mp3");
 }
 
 void draw() { 
@@ -134,6 +134,8 @@ void draw() {
   text("You take the blue pill", 575, 500);
   text("-", circle2X-1, 530);
   text("you play against a computer", 540, 560);
+  textSize(20);
+  text("* Turn volume on", 0, 698);
   
   if (vsPlayer == true || vsComputer == true){
     background(0);
@@ -167,22 +169,22 @@ void draw() {
     text("medium", 573, 275+50);
     text("hard", 732, 275+50);
     
-    if (vsPlayer = true){
+    if (vsPlayer == true){
       textSize(15);
       text("For Player 1:", 250, 500);
       text("Press 'W' for up", 250, 550);
-      text("Press 'S' for down", 250, 600);
-      text("For Player 2:", 450, 500);
-      text("Press 'UP' for up", 450, 550);
-      text("Press 'DOWN' for down", 450, 600);
+      text("Press 'S' for down", 250, 575);
+      text("For Player 2:", 550, 500);
+      text("Press 'UP' for up", 550, 550);
+      text("Press 'DOWN' for down", 550, 575);
     }
     
-    if (vsComputer = true){
+    if (vsComputer == true){
       textSize(15);
       text("For Player 1:", 250, 500);
       text("Press 'W' for up", 250, 550);
-      text("Press 'S' for down", 250, 600);
-      text("Player 2 is the computer", 450,500);
+      text("Press 'S' for down", 250, 575);
+      text("Player 2 is the computer", 550,500);
     }
   }
   
@@ -214,8 +216,9 @@ void draw() {
     //bottom and top edge of screen
     if (ballTopEdge < 0 || ballBottomEdge > height) {
       dY = -dY;
-      //soundWalls.play();
+      soundWalls.play();                                                   //******************************* only plays first wall hit, none after that
     }
+    
     //interacting with paddle edges
     if (ballLeftEdge < p1RightEdge) {
       if (ballTopEdge > p1BottomEdge || ballBottomEdge < p1TopEdge) {
@@ -295,8 +298,6 @@ void draw() {
   
   
     if (p1Score == 5 || p2Score == 5) {
-        vsPlayer = false;
-        vsComputer = false;
         startgame = false;
         levelEasy = false;
         levelMedium = false;
@@ -308,8 +309,15 @@ void draw() {
         rect3Over = false;
         currentColor1 = currentColor2 = currentColor3 = rectColor;
       }
-      if (p2Score > p1Score) {
+      if (p2Score > p1Score && vsPlayer == true) {
         winner = "Player Two WINS!";
+        rect1Over = false;
+        rect2Over = false;
+        rect3Over = false;
+        currentColor1 = currentColor2 = currentColor3 = rectColor;
+      }
+      if (p2Score > p1Score && vsComputer == true) {
+        winner = "Computer WINS!";
         rect1Over = false;
         rect2Over = false;
         rect3Over = false;
@@ -347,7 +355,7 @@ void draw() {
         scale(1.25);
         image(imgl5, 990, 400);
       } 
-      if (winner == "Player Two WINS!") {
+      if (winner == "Player Two WINS!" || winner == "Computer WINS!") {
         scale(.80);
         image(imgw1, 1028, 0);
         scale(.77);
@@ -375,6 +383,9 @@ void draw() {
       paddle1X = 50;
       paddle2X = 934;
       noLoop();
+      
+      vsPlayer = false;
+      vsComputer = false;
     }
    }
 }
