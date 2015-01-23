@@ -131,6 +131,8 @@ void draw() {
   fill(255,255,255);
   textSize(100);
   text("PONG", 356, 175);
+  textSize(28);
+  text("By Caitlin Stanton & Emily Xu", 299, 215);
   textSize(25);
   text("You take the red pill", 180, 500); 
   text("-", circle1X-1, 530);
