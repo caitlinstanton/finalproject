@@ -65,6 +65,9 @@ Enjoy!
      - Worked on sound code (EX) <br>
      - Made relatively imperfect AI (CS) <br>
 
-1/22 - Fixed the bounce off the wall sound (EX) <br>
+1/22 - Added the bounce off the wall sound (EX) <br>
      - Added instructions on level page (EX) <br>
      - Altered the winner/loser screen to include the computer (EX) <br>
+     
+1/23 - Fixed the wall/paddle sounds so both play (CS,EX) <br>
+     - Added LOTS OF COMMENTS (CS) <br>
